@@ -3,29 +3,38 @@ const searchQuery = urlParams.get("search");
 
 console.log(searchQuery);
 
-axios
-  .post("/api/search", { search: searchQuery })
-  .then((response) => {
-    console.log(response.data);
+let totalPages = 0; // Total number of pages
+let currentPage = 0; // Current page
 
-    const data = response.data;
+async function fetchResults(page) {
 
-    const results = data.results;
+    try {
+        const response = await axios.post("/api/search", { search: searchQuery, page: page });
+        console.log(response.data);
 
-    createCard(results);
-  })
-  .catch((error) => {
-    console.log(error);
-  });
+        const data = response.data;
+
+        totalPages = data.total_hits / data.per_page;
+        currentPage = data.page;
+
+        const results = data.results;
+
+        createCard(results); 
+    } catch (error) {
+        console.log(error);
+    }
+
+}
 
 let cardRow = $(".row");
+let cardColumn;
 
 function createCard(results) {
-
-
   results.forEach((item) => {
-    let img = item.record.image.url.original || "https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg"
-    let cardColumn = $("<div>", { class: "col" });
+    let img =
+      item.record.image.url.original ||
+      "https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg";
+    cardColumn = $("<div>", { class: "col" });
     let card = $("<div>", { class: "card bg-transparent border-0 h-100" });
     let cardImg = $("<img>", { class: "rounded card-img-top" }).attr(
       "src",
@@ -45,3 +54,22 @@ function createCard(results) {
     cardBody.append(cardText);
   });
 }
+
+
+
+
+$(document).ready(async function() {
+    await fetchResults(1);
+
+    $('#pagination').bootpag({
+        total: totalPages,
+        page: currentPage,
+        maxVisible: 5
+    }).on('page', function(event, num) {
+        currentPage = num;  
+
+        cardRow.find(".col").remove();
+        fetchResults(num);
+    });
+
+});

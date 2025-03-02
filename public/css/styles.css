@@ -60,3 +60,22 @@ h1, h2, h3, h4, h5, h6 {
     height: 40vh;
     object-fit: cover;
 }
+
+.pagination {
+    display: flex;
+    justify-content: center;
+}
+
+.bootpag {
+    display: flex;
+    gap: 10px;
+}
+
+.bootpag li {
+    list-style-type: none;
+}
+
+.bootpag a{
+    text-decoration: none;
+    color: white;
+}

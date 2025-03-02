@@ -26,11 +26,19 @@ app.get("/api/releases", async (req, res) => {
 app.post("/api/search", async (req, res) =>{
     try{
 
-        const searchQuery = req.body.search
+        const searchQuery = req.body.search;
+        const pageQuery = req.body.page;
+        const exclude_genreQuery = ["Adult", "Doujinshi", "Hentai"];
+
         console.log(searchQuery)
 
-        const data = new FormData();
-        data.append("search", searchQuery);
+        let data = JSON.stringify({
+            "search": searchQuery,
+            "page": pageQuery,
+            "exclude_genre": ["Doujinshi", "Hentai", "Adult", "Shounen Ai", "Yaoi", "Smut"]
+        })
+
+        console.log(exclude_genreQuery);
 
         const config = {
             method: 'post',
@@ -40,7 +48,7 @@ app.post("/api/search", async (req, res) =>{
                 'Content-Type': 'application/json'
             },
 
-            data : { search: searchQuery }
+            data : data
         }
 
         const response = await axios.request(config);
