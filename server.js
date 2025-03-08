@@ -28,14 +28,13 @@ app.post("/api/search", async (req, res) =>{
 
         const searchQuery = req.body.search;
         const pageQuery = req.body.page;
-        const exclude_genreQuery = ["Adult", "Doujinshi", "Hentai"];
 
-        console.log(searchQuery)
+        const exclude_genreQuery = ["Doujinshi", "Hentai", "Adult", "Shounen Ai", "Yaoi", "Smut", "Yuri"];
 
         let data = JSON.stringify({
             "search": searchQuery,
             "page": pageQuery,
-            "exclude_genre": ["Doujinshi", "Hentai", "Adult", "Shounen Ai", "Yaoi", "Smut"]
+            "exclude_genre": exclude_genreQuery
         })
 
         console.log(exclude_genreQuery);
@@ -59,6 +58,33 @@ app.post("/api/search", async (req, res) =>{
     }
 })
 
+app.get("/api/series", async (req, res) => {
+    try {
+        const mangaID = req.query.id;  // Get mangaID from query parameters
+
+        if (!mangaID) {
+            return res.status(400).json({ error: "Manga ID is required" });
+        }
+
+        console.log("Fetching data for manga ID:", mangaID);
+
+        let config = {
+            method: 'get',
+            maxBodyLength: Infinity,
+            url: `https://api.mangaupdates.com/v1/series/${mangaID}`, // Use mangaID dynamically
+            headers: {} // Remove `data.getHeaders()` unless needed
+        };
+
+        const response = await axios.request(config);
+        res.json(response.data); // Send response back to frontend
+    } catch (error) {
+        console.error("Error fetching data:", error);
+        res.status(500).json({ error: "Failed to fetch data" });
+    }
+});
+
+
+
 
 
 app.get("/", (req, res) => {
@@ -66,3 +92,4 @@ app.get("/", (req, res) => {
 })
 
 app.listen(port, () => console.log(`Server running on port ${port}`))
+

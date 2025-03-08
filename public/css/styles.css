@@ -28,6 +28,8 @@ input, button, textarea, select {
 p, h1, h2, h3, h4, h5, h6 {
     overflow-wrap: break-word;
     color: white;
+
+    margin: 0; /* ADDED BY ME*/
 }
   
 p {
@@ -42,14 +44,24 @@ h1, h2, h3, h4, h5, h6 {
     isolation: isolate;
 }
 
-/* CSS RESET */
+ul {
+    margin: 0;
+}
 
+/* CSS RESET END*/
 
+/* Container for all pages */
 .main-container {
     width: 70%;
     max-width: 1120px;
     margin: 0 auto;
 }
+
+.flex {
+    display: flex;
+}
+
+/* search-results.html */
 
 .search-title {
     font-size: 0.70rem;
@@ -60,6 +72,15 @@ h1, h2, h3, h4, h5, h6 {
     height: 40vh;
     object-fit: cover;
 }
+
+.card:hover {
+    transform: scale(1.05)
+}
+
+.cover__img, .cover__title {
+    cursor: pointer;
+}
+
 
 .pagination {
     display: flex;
@@ -78,4 +99,153 @@ h1, h2, h3, h4, h5, h6 {
 .bootpag a{
     text-decoration: none;
     color: white;
+}
+
+/* end */
+
+/* manga-info.html */
+
+h1 {
+    margin-top: 0.7em;
+}
+
+.title-container {
+    /* display: flex;
+    justify-content: space-between; */
+    margin-top: 3em;
+    /* padding: 10px; */
+}
+
+.info__title {
+    font-size: 2rem;
+    margin-bottom: 0.225em;
+}
+
+.info__img {
+    width: 80%;
+    max-width: 150px;
+    border-radius: 5px;
+}
+
+.info__author {
+    font-size: 0.75rem;
+    padding-top: 1em;
+    margin-bottom: 1em;
+}
+
+.info__btn {
+    list-style-type: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 0;
+    margin: 1em 0 1em 0;
+
+}
+
+.info__btn li {
+    background-color: #2e3033;
+    padding: 0.25em 0.5em;
+    border-radius: 5px;
+
+}
+
+.info__btn p {
+    font-size: 0.80rem;
+}
+
+.manga__desc p {
+    margin-top: 1em;
+}
+
+.btn {
+    background-color: #64C8FA;
+    color: white;
+}
+
+
+.details {
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 2em;
+}
+
+.first__section {
+    display: block;
+
+}
+
+
+.creator__details {
+    gap: 30px;
+}
+
+.year__details {
+    justify-content: space-between;
+    
+}
+
+.year__details p {
+    margin: 1em 0 1em 0;
+}
+
+.licensed {
+    gap: 20px;
+    align-items: center;
+}
+
+h4 {
+    
+}
+
+.comment {
+    margin-top: 1em;
+}
+
+.comment__img {
+    width: 30%;
+}
+
+/* end */
+
+
+
+@media (min-width: 800px) {
+    .title-container {
+        display: flex;
+        gap: 1rem;
+    }
+
+    .info__img {
+        max-width: 200px;
+    }
+
+    .details {
+        
+    }
+
+    .manga desc p{
+        width: 30%;
+    }
+
+    .info-container {
+        width: 100%;
+    }
+
+    
+
+    .creator__details {
+        
+        
+    }
+
+    .year__details {
+        justify-content: flex-start;
+        gap: 80px;
+    }
+
+    .first__section {
+        display: flex;
+        gap: 100px;
+    }
 }
