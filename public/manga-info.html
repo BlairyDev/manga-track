@@ -1,245 +1,140 @@
 <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-        
-        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<html lang="en">
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
 
-        <link href="css/styles.css" rel="stylesheet">
-        
-        <title>Document</title>
-    </head>
-    <body>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
-        <nav></nav>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
-        <main class="main-section">
+    <link href="css/styles.css" rel="stylesheet" />
 
-            <div class="main-container">
-                <div class="title-container">
-                    <img class="info__img" src="css/testposter.jpg">
-                    <div class="info__desc">
-                        <h1 class="info__title">Kusuriya no Hitorigoto</h1>
-                        <h5 class="info__engtitle">The Apothecary Diaries</h5>
-                        <p class="info__author">Hyuuga Natsu, Nanao Itsuki, Nekokurage</p>
+    <title>Document</title>
+</head>
 
-                        <button class="btn">Add to Library</button>
-                        <button class="btn">Notify</button>
+<body>
+    <nav></nav>
 
-                        <div class="genre__details">
-                           
+    <main class="main-section">
+        <div class="main-container">
+            <div class="title-container">
+                <img class="info__img" src="css/testposter.jpg" />
+                <div class="info__desc">
+                    <h1 class="info__title">Kusuriya no Hitorigoto</h1>
+                    <h5 class="info__engtitle">The Apothecary Diaries</h5>
+                    <p class="info__author">Hyuuga Natsu, Nanao Itsuki, Nekokurage</p>
 
+                    <button class="library-btn btn">Add to Library</button>
+                    <button class="btn">Notify</button>
+
+                    <div class="genre__details"></div>
+                </div>
+            </div>
+
+            <div class="manga__desc">
+                <p></p>
+            </div>
+
+            <div class="info-container">
+                <div class="details flex">
+                    <div class="first__section">
+                        <div class="creator__details flex">
+                            <div class="author__name">
+                                <h4>Author</h4>
+                            </div>
+
+                            <div class="artist__name">
+                                <h4>Artist</h4>
+                            </div>
                         </div>
 
-                      
+                        <div class="year__details flex">
+                            <div class="year">
+                                <h4>Year</h4>
+                                <p>2017</p>
+                            </div>
+
+                            <div class="licensed">
+                                <h4>Licensed (English)</h4>
+                                <p>Yes</p>
+                            </div>
+                        </div>
                     </div>
 
-                    
-
-                </div>
-
-                <div class="manga__desc">
-                    <p>
-                       
-                    </p>
-
-                </div>
-
-                <div class="info-container">
-
-                    <div class="details flex">
-
-                        <div class="first__section">
-                            <div class="creator__details flex">
-                            
-                                <div class="author__name">
-                                    <h4>Author</h4>
-                                   
-    
-                                </div>
-    
-                                <div class="artist__name">
-                                    <h4>Artist</h4>
-                                  
-                                </div>
-    
-                            </div>
-    
-
-                            <div class="year__details flex">
-                                <div class="year">
-                                    <h4>Year</h4>
-                                    <p>2017</p>
-                                </div>
-                               
-                                <div class="licensed">
-                                    <h4>Licensed (English)</h4>
-                                    <p>Yes</p>
-                                </div>
-
-                            </div>
-
-                        
-    
+                    <div class="publisher-details flex">
+                        <div class="publisher__name">
+                            <h4>Publishers</h4>
                         </div>
-
-                
-                        <div class="publisher-details flex">
-                        
-                            <div class="publisher__name">
-                                <h4>Publishers</h4>
-                                
-                            </div>
-                        </div>
-
-                        <div class="scanlator__details">
-                            <div class="scanlator__name">
-                                <h4>Groups Scanlating</h4>
-                                <ul class="info__btn">
-                                    <li>
-                                        <p>
-                                            Kongkalikong Scanlation
-                                        </p>
-                                    </li>
-
-                                    <li>
-                                        <p>
-                                            m00nr4bb1t
-                                        </p>
-                                    </li>
-
-                                    <li>
-                                        <p>
-                                            No Group Scanlation
-                                        </p>
-                                    </li>
-
-
-                                    <li>
-                                        <p>
-                                            Phoenix Serenade Scans
-                                        </p>
-                                    </li>
-
-                                </ul>
-
-                            </div>
-
-                            
-                        </div>
-
                     </div>
-                    
-                </div>
 
+                    <div class="scanlator__details">
+                        <div class="scanlator__name">
+                            <h4>Groups Scanlating</h4>
+                            <ul class="info__btn">
+                                <li>
+                                    <p>Kongkalikong Scanlation</p>
+                                </li>
 
-                <div class="review-container">
-                    <h1>Reviews</h1>
-                    <div class="comment-container">
-                        <div class="comment">
-                            <div class="comment__img">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg">
+                                <li>
+                                    <p>m00nr4bb1t</p>
+                                </li>
 
-                            </div>
-                            <h3 class="comment__user">Blairnicorn</h3>
-                            <p>I still remember the first time I read the forest training arc, and how excited I got with every chapter. It's a really nice memory.
+                                <li>
+                                    <p>No Group Scanlation</p>
+                                </li>
 
-                                ...It has been a long time since the series has been able to capture that level of hype for me. At this point I'm just reading new chapters on autopilot. It's a damn shame because the author was able to maintain a pretty decent story quality for a long time before dropping off. When you start hoping for a manga to end quickly with every chapter, you know it's not going to come back to that level any more. I just hope the ending isn't too bad.</p>
+                                <li>
+                                    <p>Phoenix Serenade Scans</p>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
             </div>
 
-        </main>
+            <div class="review-container">
+                <h1>Write A Review</h1>
+                <textarea class="input-review"></textarea>
+                <button class="review-btn">test</button>
 
-        <footer></footer>
+                <h1>Reviews</h1>
+                <div class="comment-container">
+                    <div class="comment">
+                        <div class="comment__img">
+                            <img class="w-50"
+                                src="https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg" />
+                        </div>
+                        <h3 class="comment__user">Blairnicorn</h3>
+                        <p>
+                            I still remember the first time I read the forest training arc,
+                            and how excited I got with every chapter. It's a really nice
+                            memory. ...It has been a long time since the series has been
+                            able to capture that level of hype for me. At this point I'm
+                            just reading new chapters on autopilot. It's a damn shame
+                            because the author was able to maintain a pretty decent story
+                            quality for a long time before dropping off. When you start
+                            hoping for a manga to end quickly with every chapter, you know
+                            it's not going to come back to that level any more. I just hope
+                            the ending isn't too bad.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
 
-    </body>
+    <footer></footer>
+</body>
 
-    <script>
-        let mangaID = localStorage.getItem('manga-id');
-        let mangaImg;
-        let mangaTitle;
-        let mangaGenres;
-        let mangaDesc;
-        let mangaAuthors;
-        let mangaYear;
-        let mangaIsLicensed;
-        let mangaPublishers
-        let mangaScanlators;
+<script src="info.js">
+    
+</script>
 
-        async function getSeries(){
-
-            try{
-                const response = await axios.get('/api/series', {
-                    params: {id: mangaID}
-                });
-
-                console.log(response.data.title);
-
-
-                mangaImg = response.data.image.url.original
-                mangaTitle = response.data.title;
-                mangaGenres = response.data.genres;
-                mangaDesc = response.data.description;
-                mangaAuthors = response.data.authors;
-                mangaYear = response.data.year;
-                mangaIsLicensed = response.data.licensed;
-                mangaPublishers = response.data.publishers;
-                // mangaScanlators = dont forget to add this use API to get group scanlations
-
-                $(".info__title").text(mangaTitle)
-                
-                createList("genre__details", "genres", mangaGenres);
-                createList("author__name", "", mangaAuthors);
-                createList("artist__name", "", mangaAuthors);
-                createList("publisher__name", "", mangaPublishers)
-
-                $(".manga__desc p").text(mangaDesc)
-
-
-            }catch (error){
-                console.log("Error fetching data:", error);
-            }
-            
-        }
-
-        function createList(detailContainer, className, mangaData) {
-
-            let container = $(`.${detailContainer}`);
-
-            let ul = $("<ul>", {class: `${className} info__btn`});
-            
-            mangaData.forEach((data) => {
-
-
-                if((detailContainer === "author__name" && data.type === "Artist") || (detailContainer === "artist__name" && data.type === "Author")){
-                    console.log("nice");
-                    return;
-                }
-                let li = $("<li>");
-        
-                let p = $("<p>").text((data.name) || data.genre || data.publisher_name)
-                
-                li.append(p);
-                ul.append(li);
-            })
-
-            container.append(ul);
-
-
-        }
-
-      
-        getSeries();
-
-
-        
-       
-    </script>
 </html>
