@@ -13,6 +13,7 @@ body {
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
     background-color: #191a1c !important;
+   
     
 }
   
@@ -208,6 +209,70 @@ h4 {
 
 /* end */
 
+/* index.html */
+.main-section {
+    margin-top: 3em;
+}
+
+
+
+.search-bar {
+    --size: 50px;
+    --padding: 8px;
+    --expanded-width: 320px;
+
+    display: flex;
+    justify-content: flex-end;
+  
+    
+    border-radius: 100px;
+    outline: 1px solid transparent;
+    overflow: hidden;
+
+    padding: var(--padding);
+    margin-inline: auto;
+    width: var(--size);
+    height: var(--size);
+    max-width: 100%;
+    transition: width 0.5s, outline 0.5s;
+}
+
+.search-bar:hover {
+    width: var(--expanded-width);
+    outline: 1px solid #2e2e2e;
+}
+
+.search-input {
+    font-size: 18px;
+    color: white;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    margin-inline: 1rem;
+    flex: auto;
+    margin-left: 4em;
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+
+.search-bar:hover .search-input {
+    opacity: 1;
+}
+
+.search-submit {
+    flex: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    color: #fff;
+    background-color: #3a3a3a;
+    border-radius: 50%;
+    border: none;
+    width: calc(var(--size) - var(--pading) - var(--padding));
+    aspect-ratio: 1;
+    cursor: pointer;
+}
 
 
 @media (min-width: 800px) {

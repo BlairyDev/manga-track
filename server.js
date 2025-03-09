@@ -15,13 +15,14 @@ app.use(express.json());
 
 app.get("/api/releases", async (req, res) => {
     try{
-        const response = await axios.get("https://api.mangaupdates.com/v1/releases/days");
+        const response = await axios.get("https://jsonblob.com/api/jsonBlob/1347844549984313344");
         res.json(response.data);
 
     }catch{
         res.status(500).json({error: "Failed to fetch data"});
     }
 })
+
 
 app.post("/api/search", async (req, res) =>{
     try{
@@ -60,7 +61,7 @@ app.post("/api/search", async (req, res) =>{
 
 app.get("/api/series", async (req, res) => {
     try {
-        const mangaID = req.query.id;  // Get mangaID from query parameters
+        const mangaID = req.query.id;
 
         if (!mangaID) {
             return res.status(400).json({ error: "Manga ID is required" });
@@ -71,20 +72,17 @@ app.get("/api/series", async (req, res) => {
         let config = {
             method: 'get',
             maxBodyLength: Infinity,
-            url: `https://api.mangaupdates.com/v1/series/${mangaID}`, // Use mangaID dynamically
-            headers: {} // Remove `data.getHeaders()` unless needed
+            url: `https://api.mangaupdates.com/v1/series/${mangaID}`,
+            headers: {}
         };
 
         const response = await axios.request(config);
-        res.json(response.data); // Send response back to frontend
+        res.json(response.data);
     } catch (error) {
         console.error("Error fetching data:", error);
         res.status(500).json({ error: "Failed to fetch data" });
     }
 });
-
-
-
 
 
 app.get("/", (req, res) => {

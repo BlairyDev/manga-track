@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/530e895f01.js" crossorigin="anonymous"></script>
+
+
+    <!-- Axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <!-- JQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <title>Document</title>
+    <link href="css/styles.css" rel="stylesheet" />
+  </head>
+  <body class="">
+    
+    <main class="login-section main-container d-flex justify-content-center align-items-center w-75 flex-column gap-5 mt-5">
+
+        <img class="w-50" src="css/logo.jpeg">
+        
+
+        <form class="p-5 rounded" style="width: 40%; background-color: #222327">
+            <div class="mb-3">
+              <label for="username" class="form-label">Username</label>
+              <input type="text" class="form-control" id="username" aria-describedby="emailHelp" style="background-color: #2c2d31; border: none; color: white;">
+            </div>
+            <div class="mb-3">
+              <label for="password" class="form-label">Password</label>
+              <input type="password" class="form-control" id="password" style="background-color: #2c2d31; border: none; color: white">
+            </div>
+            <button type="submit" class="btn btn-primary">Sign in</button>
+            <p class="mt-2">Not a member? <a href="#">Register</a></p>
+        </form>
+
+        
+    </main>
+  </body>
+
+  <script>
+
+    let loginBtn = document.querySelector('.btn');
+
+
+
+    loginBtn.addEventListener('click', (event) => {
+        event.preventDefault();
+        axios.get('https://jsonblob.com/api/jsonBlob//1347859382574178304')
+            .then(response => {
+                console.log(response.data);
+                
+                loginAuth(response.data)
+
+
+            })
+            .catch(error => {
+                console.error(error);
+            });
+
+    })
+
+   
+
+    function loginAuth(data) {
+
+        let username = document.querySelector('#username').value;
+        let password = document.querySelector('#password').value;
+
+        console.log(username)
+        console.log(password)
+        const user = data.users.find(user => user.username === username);
+
+        if (user && user.password === password) {
+            console.log("Login successful!");
+            
+            localStorage.setItem("user-id", user.user_id);
+            localStorage.setItem("username", user.username);
+
+            
+
+            window.location.href = "index.html";
+        } else {
+            console.log("Invalid username or password.");
+            return false;
+        }
+    }
+
+    
+
+  </script>
+
+
+</html>
