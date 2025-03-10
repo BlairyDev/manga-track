@@ -62,6 +62,10 @@ ul {
     display: flex;
 }
 
+.title {
+    margin-top: 1em;
+}
+
 /* search-results.html */
 
 .search-title {
@@ -207,6 +211,18 @@ h4 {
     width: 30%;
 }
 
+.inner__img {
+    width: 100%;
+    max-width: 150px;
+    height: 150px;
+    object-fit: cover;
+}
+
+.input-review {
+    height: 200px;
+    background-color: #2e3033;
+}
+
 /* end */
 
 /* index.html */
@@ -285,6 +301,19 @@ h4 {
         max-width: 200px;
     }
 
+    .info__desc {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+    }
+
+    .btn {
+        flex-grow: 0;
+        flex-shrink: 0;
+        flex-basis: auto;
+        padding: 10px 20px;
+    }
+
     .details {
         
     }
@@ -310,6 +339,11 @@ h4 {
     }
 
     .first__section {
+        display: flex;
+        gap: 100px;
+    }
+
+    .second__section {
         display: flex;
         gap: 100px;
     }

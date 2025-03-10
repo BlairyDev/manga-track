@@ -16,11 +16,60 @@
 
     <link href="css/styles.css" rel="stylesheet" />
 
+
+     <!-- Font Awesome -->
+     <script src="https://kit.fontawesome.com/530e895f01.js" crossorigin="anonymous"></script>
+
     <title>Document</title>
 </head>
 
 <body>
-    <nav></nav>
+    
+    <header class="header-section">
+
+        <nav class="navbar navbar-expand-lg">
+            <div class="container-fluid main-container p-0">
+                <a class="navbar-brand" href="#" style="color: white;">MangaTrack</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-nav">
+                        <a class="nav-link active" aria-current="page" href="#" style="color: white;">Library</a>
+
+                    </div>
+
+                </div>
+                <div class="d-flex">
+                    <form class="d-flex" action="/search-results.html" method="get">
+
+                        <div class="search-bar">
+                            <input type="text" class="search-input" name="search" placeholder="Search">
+                            <button class="search-submit">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </button>
+                        </div>
+
+
+
+                    </form>
+                    <div class="ps-3 d-flex align-items-center gap-2">
+                        <p class="greeting">Hello Guest!</p>
+                        <a class="login-btn" href="#">Log in</a>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </nav>
+
+
+
+    </header>
 
     <main class="main-section">
         <div class="main-container">
@@ -31,8 +80,11 @@
                     <h5 class="info__engtitle">The Apothecary Diaries</h5>
                     <p class="info__author">Hyuuga Natsu, Nanao Itsuki, Nekokurage</p>
 
-                    <button class="library-btn btn">Add to Library</button>
-                    <button class="btn">Notify</button>
+                    <div class="d-flex gap-3">
+                        <button class="library-btn btn">Add to Library</button>
+                        <button class="btn">Notify</button>
+
+                    </div>
 
                     <div class="genre__details"></div>
                 </div>
@@ -68,50 +120,60 @@
                         </div>
                     </div>
 
-                    <div class="publisher-details flex">
-                        <div class="publisher__name">
-                            <h4>Publishers</h4>
+                    <div class="second__section">
+                        <div class="publisher-details flex">
+                            <div class="publisher__name">
+                                <h4>Publishers</h4>
+                            </div>
                         </div>
+    
+                        <div class="scanlator__details">
+                            <div class="scanlator__name">
+                                <h4>Groups Scanlating</h4>
+                                <ul class="info__btn">
+                                    <li>
+                                        <p>Kongkalikong Scanlation</p>
+                                    </li>
+    
+                                    <li>
+                                        <p>m00nr4bb1t</p>
+                                    </li>
+    
+                                    <li>
+                                        <p>No Group Scanlation</p>
+                                    </li>
+    
+                                    <li>
+                                        <p>Phoenix Serenade Scans</p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
                     </div>
 
-                    <div class="scanlator__details">
-                        <div class="scanlator__name">
-                            <h4>Groups Scanlating</h4>
-                            <ul class="info__btn">
-                                <li>
-                                    <p>Kongkalikong Scanlation</p>
-                                </li>
-
-                                <li>
-                                    <p>m00nr4bb1t</p>
-                                </li>
-
-                                <li>
-                                    <p>No Group Scanlation</p>
-                                </li>
-
-                                <li>
-                                    <p>Phoenix Serenade Scans</p>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+                   
                 </div>
             </div>
 
             <div class="review-container">
-                <h1>Write A Review</h1>
-                <textarea class="input-review"></textarea>
-                <button class="review-btn">test</button>
+                <h3 class="mt-5 mb-3">Write A Review</h3>
+                <div class="d-flex flex-column gap-4">
+                    <textarea class="input-review w-50"></textarea>
+                    <div>
+                        <button class="review-btn btn">Submit</button>
+                    </div>
+                    
+                </div>
+        
 
                 <h1>Reviews</h1>
                 <div class="comment-container">
                     <div class="comment">
                         <div class="comment__img">
-                            <img class="w-50"
-                                src="https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg" />
+                            <img class="w-50 inner__img" src="https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg" />
                         </div>
-                        <h3 class="comment__user">Blairnicorn</h3>
+                        <h3 class="comment__user mt-3">Blairnicorn</h3>
                         <p>
                             I still remember the first time I read the forest training arc,
                             and how excited I got with every chapter. It's a really nice

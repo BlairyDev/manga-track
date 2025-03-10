@@ -86,8 +86,6 @@ cardRowSelected.addEventListener("click", (event) => {
   let cards = Array.from(cardRowSelected.getElementsByClassName("cover__img"));
   
   if(target.tagName === 'IMG' || target.tagName === 'P'){
-
-    
     
     let mangaID = mangas[cards.indexOf(event.target)].record.series_id
 

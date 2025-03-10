@@ -1,5 +1,6 @@
 let mangaID = localStorage.getItem("manga-id");
 let userName = localStorage.getItem("username");
+let userID = localStorage.getItem("user-id")
 
 let mangaImg;
 let mangaTitle;
@@ -22,7 +23,7 @@ async function getSeries() {
 
     console.log(response.data.title);
 
-    mangaImg = response.data.image.url.original;
+    mangaImg = response.data.image.url.original ||  "https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg";
     mangaTitle = response.data.title;
     mangaGenres = response.data.genres;
     mangaDesc = response.data.description;
@@ -40,6 +41,9 @@ async function getSeries() {
     createList("publisher__name", "", mangaPublishers);
 
     $(".manga__desc p").text(mangaDesc);
+    $(".info__img").attr("src", mangaImg)
+
+
   } catch (error) {
     console.log("Error fetching data:", error);
   }
@@ -75,7 +79,7 @@ async function getReviews() {
       "https://jsonblob.com/api/jsonBlob/1348185479006314496"
     );
     console.log("Fetched Reviews:", response.data);
-    return response.data.comments; // Make sure this returns the correct array
+    return response.data.comments;
   } catch (error) {
     console.log("Error fetching reviews:", error);
     return [];
@@ -88,11 +92,11 @@ function viewReviews(reviews) {
   reviews.forEach((userComment) => {
     let comment = $("<div>", { class: "comment" });
     let commentImg = $("<div>", { class: "comment__img" });
-    let img = $("<img>", { class: "w-50" }).attr(
+    let img = $("<img>", { class: "w-50 inner__img" }).attr(
       "src",
       "https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg"
     );
-    let commentUser = $("<h3>", { class: "comment__user" }).text(
+    let commentUser = $("<h3>", { class: "comment__user mt-3" }).text(
       userComment.username
     );
     let commentText = $("<p>", { class: "" }).text(userComment.comment);
@@ -148,4 +152,69 @@ reviewBtn.addEventListener("click", async (event) => {
   }
 });
 
+let libraryBtn = document.querySelector(".library-btn");
+
+
+libraryBtn.addEventListener("click", async (event) => {
+  
+  try {
+    let newSeries = {
+      series_id: mangaID,
+      title: mangaTitle,
+      image: mangaImg
+    };
+
+    const response = await axios.get("https://jsonblob.com/api/jsonBlob/1347859382574178304");
+    
+    console.log(response.data);
+
+    let users = response.data.users;
+
+    const user = users.find(user => user.username === userName);
+
+    if (user && libraryBtn.textContent === "Add to Library") {
+      user.series.push(newSeries);
+
+    }
+    else if(user && libraryBtn.textContent === "Remove to Library"){
+      user.series = user.series.filter(series => series.series_id !== mangaID);
+    }
+    else {
+      console.log("User not found");
+    }
+
+    if(user){
+      axios.put("https://jsonblob.com/api/jsonBlob/1347859382574178304", { users: users })
+        .then((response) => {
+          console.log("User updated successfully:", response.data);
+        })
+        .catch((error) => {
+          console.error("Error updating user:", error);
+        });
+    }
+
+
+
+  } catch (error) {
+    console.log("Failed to fetch data:", error);
+  }
+});
+
+async function checkLibrary() {
+  const response = await axios.get("https://jsonblob.com/api/jsonBlob/1347859382574178304");
+
+  const user = response.data.users.find(user => user.username === userName);
+
+  const series = user.series.find(series => series.series_id === mangaID);
+
+
+  if(series){
+    libraryBtn.textContent = "Remove to Library"
+  }
+  else {
+    libraryBtn.textContent = "Add to Library"
+  }
+}
+
 getSeries();
+checkLibrary();
