@@ -19,16 +19,22 @@ A website for all your Manga(Japanese), Manwha(Korean), and Manhua(Chinese) seri
 # Instructions to run the website
 
 1. Clone the repository
-    `git clone git@github.com:BlairyDev/manga-check.git` or `git clone https://github.com/BlairyDev/manga-check.git`
+    ```terminal
+    git clone git@github.com:BlairyDev/manga-check.git
+                        or
+    git clone https://github.com/BlairyDev/manga-check.git
 
 2. Install dependencies in terminal
-    `npm install`
+    ```terminal
+    npm install
 
 3. Run the server(to make MangaUpdates API work)
-    `node server.js`
+    ```terminal
+    node server.js
 
 4. Open website with this link
-    `http://localhost:8080/`
+    ```terminal
+    http://localhost:8080/
         
 
 
