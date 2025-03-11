@@ -24,6 +24,7 @@
      <!-- Font Awesome -->
      <script src="https://kit.fontawesome.com/530e895f01.js" crossorigin="anonymous"></script>
 
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     
     <title>Document</title>
 </head>
@@ -34,7 +35,7 @@
 
         <nav class="navbar navbar-expand-lg">
             <div class="container-fluid main-container p-0">
-              <a class="navbar-brand" href="#" style="color: white;">MangaTrack</a>
+              <a class="navbar-brand" href="#" style="color: white;"><img src="css/logo.png" style="width: 100%; max-width: 150px;"></a>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
@@ -72,10 +73,72 @@
 
     </header>
 
+    <div class="swiper mySwiper">
+        <div class="swiper-wrapper highlight-swiper">
+          <div class="swiper-slide">
+            <div class="bg"></div>
+            <h1>Peerless Dad</h1>
+          </div>
+          <div class="swiper-slide">
+            <div class="bg"></div>
+            <h1>Wind Breaker</h1>
+          </div>
+          <div class="swiper-slide">
+            <div class="bg"></div>
+            <h1>Gurenn Lagann</h1>
+          </div>
+          <div class="swiper-slide">
+            <div class="bg"></div>
+            <h1>Soul Eater</h1>
+          </div>
+          <div class="swiper-slide">
+            <div class="bg"></div>
+            <h1>Arcane Sniper</h1>
+          </div>
+        </div>
+
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-pagination"></div>
+    </div>
+
     <main class="main-section">
 
         <div class="main-container">
-            <h2>New Releases</h2>
+
+            <h2 class="mb-4">Top Series</h2>
+
+            <div class="swiper freeSwiper">
+                <div class="swiper-wrapper top-swiper">
+                  <div class="swiper-slide free-slide"></div>
+                  <div class="swiper-slide free-slide"></div>
+                  <div class="swiper-slide free-slide"></div>
+                  <div class="swiper-slide free-slide"></div>
+                  <div class="swiper-slide free-slide"></div>
+                  <div class="swiper-slide free-slide"></div>
+                  <div class="swiper-slide free-slide"></div>
+                  <div class="swiper-slide free-slide"></div>
+                </div>
+                <div class="swiper-pagination free-pagination"></div>
+            </div>
+
+            <h2 class="mt-5 mb-4">Recommendations</h2>
+            
+            <div class="swiper freeSwiper">
+                <div class="swiper-wrapper recommend-swiper">
+                  <div class="swiper-slide free-slide"></div>
+                  <div class="swiper-slide free-slide"></div>
+                  <div class="swiper-slide free-slide"></div>
+                  <div class="swiper-slide free-slide"></div>
+                  <div class="swiper-slide free-slide"></div>
+                  <div class="swiper-slide free-slide"></div>
+                  <div class="swiper-slide free-slide"></div>
+                  <div class="swiper-slide free-slide"></div>
+                </div>
+                <div class="swiper-pagination free-pagination"></div>
+            </div>
+
+            <h2 class="mt-5 mb-4">New Releases</h2>
 
             <div class="row row-cols-1 row-cols-md-5 g-3 m-0"></div>
     
@@ -93,6 +156,9 @@
 
 </body>
 
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script type="module" src="api.js"></script>
+
 
 </html>

@@ -15,28 +15,25 @@ let loginBtn = document.querySelector(".login-btn");
 console.log(userName);
 
 if (userID != null) {
-
-    loginBtn.textContent = "Log out";
-    greeting.textContent = `Greetings ${userName}`;
+  loginBtn.textContent = "Log out";
+  greeting.textContent = `Greetings ${userName}`;
 } else {
-    loginBtn.style.display = "Log in";
-    greeting.textContent = `Greetings Guest`;
+  loginBtn.style.display = "Log in";
+  greeting.textContent = `Greetings Guest`;
 }
 
 loginBtn.addEventListener("click", (event) => {
-    if(loginBtn.textContent == "Log in") {
-        window.location.href = "login.html";
-    }
-    else {
-        loginBtn.textContent = "Log in"
-        localStorage.clear();
-        location.reload();
-    }
-    
+  if (loginBtn.textContent == "Log in") {
+    window.location.href = "login.html";
+  } else {
+    loginBtn.textContent = "Log in";
+    localStorage.clear();
+    location.reload();
+  }
 });
 
-let totalPages = 0; // Total number of pages
-let currentPage = 0; // Current page
+let totalPages = 0;
+let currentPage = 0;
 
 let mangas;
 
@@ -121,3 +118,108 @@ cardRowSelected.addEventListener("click", (event) => {
     window.location.href = "manga-info.html";
   }
 });
+
+
+let recommendSwiper = document.querySelectorAll(".recommend-swiper .free-slide");
+let topSwiper = document.querySelectorAll(".top-swiper .free-slide");
+let highlightSwiper = document.querySelectorAll(".highlight-swiper .swiper-slide");
+
+async function getTop() {
+  try {
+
+    let count = 0;
+
+    const response = await axios.get(
+      "https://jsonblob.com/api/jsonBlob/1348564764577685504"
+    );
+
+    let series = response.data.results;
+      recommendSwiper.forEach((slide, index) => {
+      
+      
+      let swiperImg = document.createElement("img");
+      swiperImg.src = series[index].record.image.url.original;
+      slide.appendChild(swiperImg);
+
+      let textElement = document.createElement("p");
+      textElement.textContent = series[count].record.title;
+      slide.appendChild(textElement);
+
+      count++;
+
+    });
+
+    topSwiper.forEach((slide) => {
+      let swiperImg = document.createElement("img");
+      swiperImg.src = series[count].record.image.url.original;
+      slide.appendChild(swiperImg);
+      
+      let textElement = document.createElement("p");
+      textElement.textContent = series[count].record.title;
+      slide.appendChild(textElement);
+
+      
+      count++;
+    })
+
+  
+
+    let mangaCover = ["arcane-sniper.png", "peerless-dad.png", "wind-breaker.jpg", "gurenn-lagann.jpg", "soul-eater.jpg"]
+
+    let mangaCount = 0;
+
+    let bg = document.querySelectorAll(".bg");
+
+    highlightSwiper.forEach((slide, index) => {
+
+      bg[index].style.backgroundImage = `url(css/posters/${mangaCover[mangaCount]})`;
+      console.log(mangaCover[mangaCount])
+      bg[index].style.backgroundSize = "cover";
+      bg[index].style.backgroundPosition = "center top -170px";
+      bg[index].style.backgroundRepeat = "no-repeat";
+      
+      
+      
+      let textElement = document.createElement("h1");
+      textElement.textContent = series[count].record.title;
+      console.log(series[count].record.title)
+      // slide.appendChild(textElement);
+      count++;
+      mangaCount++;
+    })
+
+   
+  } catch (error) {
+    console.log("Error fetching data:", error);
+  }
+}
+
+var recommendationSwiper = new Swiper(".freeSwiper", {
+  slidesPerView: 4,
+  spaceBetween: 10,
+  pagination: {
+    el: ".free-pagination",
+    clickable: true,
+  },
+  loop: true
+});
+
+var swiper = new Swiper(".mySwiper", {
+  spaceBetween: 30,
+  centeredSlides: true,
+  autoplay: {
+    delay: 2500,
+    disableOnInteraction: false,
+  },
+  pagination: {
+    el: ".swiper-pagination",
+    clickable: true,
+  },
+  loop: true,
+  navigation: {
+    nextEl: ".swiper-button-next",
+    prevEl: ".swiper-button-prev",
+  },
+});
+
+getTop();
