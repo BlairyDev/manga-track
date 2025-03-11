@@ -20,9 +20,9 @@ A website for all your Manga(Japanese), Manwha(Korean), and Manhua(Chinese) seri
 
 1. Clone the repository
     ```terminal
-    git clone git@github.com:BlairyDev/manga-check.git
+    git clone git@github.com:BlairyDev/manga-track.git
                         or
-    git clone https://github.com/BlairyDev/manga-check.git
+    git clone https://github.com/BlairyDev/manga-track.git
 
 2. Install dependencies in terminal
     ```terminal
