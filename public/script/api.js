@@ -32,6 +32,20 @@ loginBtn.addEventListener("click", (event) => {
   }
 });
 
+let searchInput= document.querySelector(".search-input");
+let searchSubmit = document.querySelector(".search-submit");
+
+
+searchInput.addEventListener("keydown", (event) => {
+  
+  if(event.key === "Enter") {
+    searchSubmit.disabled = false;
+    searchSubmit.click();
+  }
+  
+})
+
+
 let totalPages = 0;
 let currentPage = 0;
 
@@ -119,6 +133,7 @@ cardRowSelected.addEventListener("click", (event) => {
   }
 });
 
+let series;
 
 let recommendSwiper = document.querySelectorAll(".recommend-swiper .free-slide");
 let topSwiper = document.querySelectorAll(".top-swiper .free-slide");
@@ -133,7 +148,7 @@ async function getTop() {
       "https://jsonblob.com/api/jsonBlob/1348564764577685504"
     );
 
-    let series = response.data.results;
+    series = response.data.results;
       recommendSwiper.forEach((slide, index) => {
       
       
@@ -193,6 +208,47 @@ async function getTop() {
     console.log("Error fetching data:", error);
   }
 }
+
+let mainSection = document.querySelector(".main-section")
+
+mainSection.addEventListener("click", event => {
+  const target = event.target.closest(".swiper-slide"); // Find closest slide
+  if (!target){
+    return
+  };
+
+  let cards = Array.from(document.querySelectorAll(".main-section .swiper-slide"));
+  let index = cards.indexOf(target); 
+
+
+  let mangaID = series[index].record.series_id;
+  console.log(mangaID)
+  localStorage.setItem("manga-id", mangaID);
+  window.location.href = "manga-info.html";
+  
+});
+
+let swiperWrapper = document.querySelector(".swiper-wrapper")
+
+swiperWrapper.addEventListener("click", event => {
+  const target = event.target.closest(".swiper-slide"); // Find closest slide
+  if (!target){
+    return
+  };
+
+  let cards = Array.from(document.querySelectorAll(".highlight-swiper .swiper-slide"));
+
+  let index = cards.indexOf(target); 
+
+
+  let mangaID = series[21-index].record.series_id;
+  console.log(mangaID)
+  localStorage.setItem("manga-id", mangaID);
+  window.location.href = "manga-info.html";
+});
+
+
+
 
 var recommendationSwiper = new Swiper(".freeSwiper", {
   slidesPerView: 4,

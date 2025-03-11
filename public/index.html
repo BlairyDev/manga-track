@@ -2,163 +2,166 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-bootpag/1.0.4/jquery.bootpag.min.js"
-        integrity="sha512-wHItMiTGA88lHywV54pU8t5Nm4le+AmLJGIVS/U1mpd8PuV0h/Azjw1JhQqZH6UnUP/uOraGUcSI1tGvnE/Mug=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-bootpag/1.0.4/jquery.bootpag.min.js"
+    integrity="sha512-wHItMiTGA88lHywV54pU8t5Nm4le+AmLJGIVS/U1mpd8PuV0h/Azjw1JhQqZH6UnUP/uOraGUcSI1tGvnE/Mug=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-    <link href="css/styles.css" rel="stylesheet">
+  <link href="css/styles.css" rel="stylesheet">
 
-     <!-- Font Awesome -->
-     <script src="https://kit.fontawesome.com/530e895f01.js" crossorigin="anonymous"></script>
+  <!-- Font Awesome -->
+  <script src="https://kit.fontawesome.com/530e895f01.js" crossorigin="anonymous"></script>
 
-     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-    
-    <title>Document</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+  <title>Document</title>
 </head>
 
 <body>
 
-    <header class="header-section">
+  <header class="header-section">
 
-        <nav class="navbar navbar-expand-lg">
-            <div class="container-fluid main-container p-0">
-              <a class="navbar-brand" href="#" style="color: white;"><img src="css/logo.png" style="width: 100%; max-width: 150px;"></a>
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+    <nav class="navbar navbar-expand-lg">
+      <div class="container-fluid main-container p-0">
+        <a class="navbar-brand" href="#" style="color: white;"><img src="css/logo.png"
+            style="width: 100%; max-width: 150px;"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+          aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <a class="nav-link active" aria-current="page" href="library.html" style="color: white;">Library</a>
+
+          </div>
+
+        </div>
+        <div class="d-flex">
+          <form class="d-flex" action="/search-results.html" method="get">
+
+            <div class="search-bar">
+              <input type="text" class="search-input" name="search" placeholder="Search">
+              <button class="search-submit" disabled>
+                <i class="fa-solid fa-magnifying-glass"></i>
               </button>
-              <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <div class="navbar-nav">
-                  <a class="nav-link active" aria-current="page" href="#" style="color: white;">Library</a>
-                  
-                </div>
-                
-              </div>
-              <div class="d-flex">
-                <form class="d-flex" action="/search-results.html" method="get">
-
-                    <div class="search-bar">
-                        <input type="text" class="search-input" name="search" placeholder="Search">
-                        <button class="search-submit">
-                            <i class="fa-solid fa-magnifying-glass"></i>
-                        </button>
-                    </div> 
-                    
-                </form>
-                <div class="ps-3 d-flex align-items-center gap-2">
-                    <p class="greeting">Hello Guest!</p>
-                    <a class="login-btn" href="#">Log in</a>
-                </div>
-               
             </div>
 
-            </div>
+          </form>
+          <div class="ps-3 d-flex align-items-center gap-2">
+            <p class="greeting">Hello Guest!</p>
+            <a class="login-btn" href="#">Log in</a>
+          </div>
 
-            
-          </nav>
-
-       
-
-    </header>
-
-    <div class="swiper mySwiper">
-        <div class="swiper-wrapper highlight-swiper">
-          <div class="swiper-slide">
-            <div class="bg"></div>
-            <h1>Peerless Dad</h1>
-          </div>
-          <div class="swiper-slide">
-            <div class="bg"></div>
-            <h1>Wind Breaker</h1>
-          </div>
-          <div class="swiper-slide">
-            <div class="bg"></div>
-            <h1>Gurenn Lagann</h1>
-          </div>
-          <div class="swiper-slide">
-            <div class="bg"></div>
-            <h1>Soul Eater</h1>
-          </div>
-          <div class="swiper-slide">
-            <div class="bg"></div>
-            <h1>Arcane Sniper</h1>
-          </div>
         </div>
 
-        <div class="swiper-button-next"></div>
-        <div class="swiper-button-prev"></div>
-        <div class="swiper-pagination"></div>
+      </div>
+
+
+    </nav>
+
+
+  </header>
+
+
+
+  <div class="swiper mySwiper">
+    <div class="swiper-wrapper highlight-swiper">
+      <div class="swiper-slide">
+        <div class="bg"></div>
+        <h1>Peerless Dad</h1>
+      </div>
+      <div class="swiper-slide">
+        <div class="bg"></div>
+        <h1>Wind Breaker</h1>
+      </div>
+      <div class="swiper-slide">
+        <div class="bg"></div>
+        <h1>Gurenn Lagann</h1>
+      </div>
+      <div class="swiper-slide">
+        <div class="bg"></div>
+        <h1>Soul Eater</h1>
+      </div>
+      <div class="swiper-slide">
+        <div class="bg"></div>
+        <h1>Arcane Sniper</h1>
+      </div>
     </div>
 
-    <main class="main-section">
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-pagination"></div>
+  </div>
 
-        <div class="main-container">
+  <main class="main-section">
 
-            <h2 class="mb-4">Top Series</h2>
+    <div class="main-container">
 
-            <div class="swiper freeSwiper">
-                <div class="swiper-wrapper top-swiper">
-                  <div class="swiper-slide free-slide"></div>
-                  <div class="swiper-slide free-slide"></div>
-                  <div class="swiper-slide free-slide"></div>
-                  <div class="swiper-slide free-slide"></div>
-                  <div class="swiper-slide free-slide"></div>
-                  <div class="swiper-slide free-slide"></div>
-                  <div class="swiper-slide free-slide"></div>
-                  <div class="swiper-slide free-slide"></div>
-                </div>
-                <div class="swiper-pagination free-pagination"></div>
-            </div>
+      <h2 class="mt-5 mb-4">Recommendations</h2>
 
-            <h2 class="mt-5 mb-4">Recommendations</h2>
-            
-            <div class="swiper freeSwiper">
-                <div class="swiper-wrapper recommend-swiper">
-                  <div class="swiper-slide free-slide"></div>
-                  <div class="swiper-slide free-slide"></div>
-                  <div class="swiper-slide free-slide"></div>
-                  <div class="swiper-slide free-slide"></div>
-                  <div class="swiper-slide free-slide"></div>
-                  <div class="swiper-slide free-slide"></div>
-                  <div class="swiper-slide free-slide"></div>
-                  <div class="swiper-slide free-slide"></div>
-                </div>
-                <div class="swiper-pagination free-pagination"></div>
-            </div>
-
-            <h2 class="mt-5 mb-4">New Releases</h2>
-
-            <div class="row row-cols-1 row-cols-md-5 g-3 m-0"></div>
-    
-            <div id="content"></div>
-            <div id="pagination"></div>
-
+      <div class="swiper freeSwiper">
+        <div class="swiper-wrapper recommend-swiper">
+          <div class="swiper-slide free-slide"></div>
+          <div class="swiper-slide free-slide"></div>
+          <div class="swiper-slide free-slide"></div>
+          <div class="swiper-slide free-slide"></div>
+          <div class="swiper-slide free-slide"></div>
+          <div class="swiper-slide free-slide"></div>
+          <div class="swiper-slide free-slide"></div>
+          <div class="swiper-slide free-slide"></div>
         </div>
-       
-    </main>
+        <div class="swiper-pagination free-pagination"></div>
+      </div>
 
-    <footer>
+      <h2 class="mb-4">Top Series</h2>
 
-    </footer>
+      <div class="swiper freeSwiper">
+        <div class="swiper-wrapper top-swiper">
+          <div class="swiper-slide free-slide"></div>
+          <div class="swiper-slide free-slide"></div>
+          <div class="swiper-slide free-slide"></div>
+          <div class="swiper-slide free-slide"></div>
+          <div class="swiper-slide free-slide"></div>
+          <div class="swiper-slide free-slide"></div>
+          <div class="swiper-slide free-slide"></div>
+          <div class="swiper-slide free-slide"></div>
+        </div>
+        <div class="swiper-pagination free-pagination"></div>
+      </div>
 
+      <h2 class="mt-5 mb-4">New Releases</h2>
+
+      <div class="row row-cols-1 row-cols-md-5 g-3 m-0"></div>
+
+      <div id="content"></div>
+      <div id="pagination"></div>
+
+    </div>
+
+  </main>
 
 </body>
 
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-<script type="module" src="api.js"></script>
+<script type="module" src="script/api.js"></script>
 
 
 </html>

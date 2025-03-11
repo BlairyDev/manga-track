@@ -114,50 +114,64 @@ let reviewBtn = document.querySelector(".review-btn");
 reviewBtn.addEventListener("click", async (event) => {
   let inputReview = document.querySelector(".input-review");
 
-  try {
-    let reviews = await getReviews();
-
-    let updatedReviews = {
-      comments: [
-        ...reviews,
-        {
-          username: userName,
-          comment: inputReview.value,
-        },
-      ],
-    };
-
-    let config = {
-      method: "put",
-      maxBodyLength: Infinity,
-      url: "https://jsonblob.com/api/jsonBlob/1348185479006314496",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      data: JSON.stringify(updatedReviews),
-    };
-
-    axios
-      .request(config)
-      .then((response) => {
-        console.log("Updated Reviews:", response.data);
- 
-        viewReviews(response.data.comments);
-      })
-      .catch((error) => {
-        console.log("Error updating reviews:", error);
-      });
-  } catch (error) {
-    console.log("Error in event listener:", error);
+  if(userName === null) {
+    event.preventDefault();
+    window.location.href = "login.html"
   }
+  else {
+    try {
+      let reviews = await getReviews();
+  
+      let updatedReviews = {
+        comments: [
+          ...reviews,
+          {
+            username: userName,
+            comment: inputReview.value,
+          },
+        ],
+      };
+  
+      let config = {
+        method: "put",
+        maxBodyLength: Infinity,
+        url: "https://jsonblob.com/api/jsonBlob/1348185479006314496",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        data: JSON.stringify(updatedReviews),
+      };
+  
+      axios
+        .request(config)
+        .then((response) => {
+          console.log("Updated Reviews:", response.data);
+   
+          viewReviews(response.data.comments);
+        })
+        .catch((error) => {
+          console.log("Error updating reviews:", error);
+        });
+    } catch (error) {
+      console.log("Error in event listener:", error);
+    }
+
+  }
+
+
 });
 
 let libraryBtn = document.querySelector(".library-btn");
 
 
 libraryBtn.addEventListener("click", async (event) => {
-  
-  try {
+
+  if(userName === null) {
+    event.preventDefault();
+    window.location.href = "login.html"
+  }
+  else {
+     try {
     let newSeries = {
       series_id: mangaID,
       title: mangaTitle,
@@ -187,6 +201,8 @@ libraryBtn.addEventListener("click", async (event) => {
       axios.put("https://jsonblob.com/api/jsonBlob/1347859382574178304", { users: users })
         .then((response) => {
           console.log("User updated successfully:", response.data);
+
+          location.reload();
         })
         .catch((error) => {
           console.error("Error updating user:", error);
@@ -194,10 +210,14 @@ libraryBtn.addEventListener("click", async (event) => {
     }
 
 
-
   } catch (error) {
     console.log("Failed to fetch data:", error);
   }
+    
+
+  }
+
+ 
 });
 
 async function checkLibrary() {
