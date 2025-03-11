@@ -1,6 +1,42 @@
 let mangaID = localStorage.getItem("manga-id");
 let userName = localStorage.getItem("username");
-let userID = localStorage.getItem("user-id")
+let userID = localStorage.getItem("user-id");
+
+
+let greeting = document.querySelector(".greeting");
+let loginBtn = document.querySelector(".login-btn");
+
+if (userID != null) {
+  loginBtn.textContent = "Log out";
+  greeting.textContent = `Greetings ${userName}`;
+} else {
+  loginBtn.style.display = "Log in";
+  greeting.textContent = `Greetings Guest`;
+}
+
+loginBtn.addEventListener("click", (event) => {
+  if (loginBtn.textContent == "Log in") {
+    window.location.href = "login.html";
+  } else {
+    loginBtn.textContent = "Log in";
+    localStorage.clear();
+    location.reload();
+  }
+});
+
+let searchInput= document.querySelector(".search-input");
+let searchSubmit = document.querySelector(".search-submit");
+
+
+searchInput.addEventListener("keydown", (event) => {
+  
+  if(event.key === "Enter") {
+    searchSubmit.disabled = false;
+    searchSubmit.click();
+  }
+  
+})
+
 
 let mangaImg;
 let mangaTitle;
@@ -32,6 +68,12 @@ async function getSeries() {
     mangaIsLicensed = response.data.licensed;
     mangaPublishers = response.data.publishers;
     // mangaScanlators = dont forget to add this use API to get group scanlations
+
+    let infoAuthor = document.querySelector(".info__author");
+
+  
+
+    infoAuthor.textContent = mangaAuthors.map(author => author.name).join(", ");
 
     $(".info__title").text(mangaTitle);
 
@@ -141,6 +183,8 @@ reviewBtn.addEventListener("click", async (event) => {
         },
         data: JSON.stringify(updatedReviews),
       };
+
+      inputReview.value = "";
   
       axios
         .request(config)
@@ -148,6 +192,7 @@ reviewBtn.addEventListener("click", async (event) => {
           console.log("Updated Reviews:", response.data);
    
           viewReviews(response.data.comments);
+        
         })
         .catch((error) => {
           console.log("Error updating reviews:", error);

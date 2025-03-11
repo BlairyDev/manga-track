@@ -85,10 +85,11 @@
         let password = document.querySelector('#password').value;
         let email = document.querySelector("#email").value;
 
-        let users = data.users
+        let users = data.users;
+        let ID = String(users.length + 1);
 
         let newUser = {
-            user_id: users.length + 1,
+            user_id: ID,
             username: username,
             password: password,
             email: email,

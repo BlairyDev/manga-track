@@ -1,11 +1,3 @@
-// axios.get('/api/releases')
-//     .then(response => {
-//         console.log(response.data);
-//     })
-//     .catch(error => {
-//         console.log("Error fetching data:", error);
-//     });
-
 let userID = localStorage.getItem("user-id");
 let userName = localStorage.getItem("username");
 
