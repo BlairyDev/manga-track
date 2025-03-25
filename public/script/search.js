@@ -39,7 +39,7 @@ function createCard(results) {
     let img =
       item.record.image.url.original ||
       "https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg";
-    cardColumn = $("<div>", { class: "col" });
+     cardColumn = $("<div>", { class: "col" });
     let card = $("<div>", { class: "card bg-transparent border-0 h-100" });
     let cardImg = $("<img>", { class: "cover__img rounded card-img-top" }).attr(
       "src",
