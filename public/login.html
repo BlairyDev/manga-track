@@ -69,6 +69,7 @@
           console.log(response)
           localStorage.setItem("username", response.data.username);
           localStorage.setItem("user-id", response.data.id);
+          localStorage.setItem("token", response.data.token)
           window.location.href = "/"
 
         } catch (error) {
@@ -79,31 +80,6 @@
 
    
 
-    function loginAuth(data) {
-
-        let username = document.querySelector('#username').value;
-        let password = document.querySelector('#password').value;
-
-        console.log(username)
-        console.log(password)
-        const user = data.users.find(user => user.username === username);
-
-        if (user && user.password === password) {
-            console.log("Login successful!");
-            
-            localStorage.setItem("user-id", user.user_id);
-            localStorage.setItem("username", user.username);
-
-            
-
-            window.location.href = "index.html";
-        } else {
-            console.log("Invalid username or password.");
-            return false;
-        }
-    }
-
-    
 
   </script>
 

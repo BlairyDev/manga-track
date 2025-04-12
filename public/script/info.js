@@ -48,6 +48,7 @@ let mangaYear;
 let mangaIsLicensed;
 let mangaPublishers;
 let mangaScanlators;
+let mangaChapters;
 
 async function getSeries() {
   try {
@@ -68,6 +69,7 @@ async function getSeries() {
     mangaIsLicensed = response.data.licensed;
     mangaPublishers = response.data.publishers;
     // mangaScanlators = dont forget to add this use API to get group scanlations
+    mangaChapters = response.data.latest_chapter
 
     let infoAuthor = document.querySelector(".info__author");
 
@@ -223,13 +225,24 @@ libraryBtn.addEventListener("click", async (event) => {
       if (userID && libraryBtn.textContent === "Add to Library") {
 
         libraryBtn.textContent = "Remove to Library"
-        const addSeriesResponse = await axios.put("/api/user", {userId: userID, mangaId: mangaID})
 
+        await Promise.all([
+          axios.post("/api/library", {
+            mangaID,
+            mangaImg,
+            mangaTitle,
+            mangaChapters
+          }),
+          axios.put("/api/user", {
+            userId: userID,
+            mangaId: mangaID
+          })
+        ]);
         
       }
       else if(userID && libraryBtn.textContent === "Remove to Library"){
         libraryBtn.textContent = "Add to Library"
-        const removeSeriesResponse = await axios.delete(`/api/${userID}/${mangaID}`)
+        await axios.delete(`/api/${userID}/${mangaID}`)
         
       }
       else {
@@ -286,9 +299,12 @@ libraryBtn.addEventListener("click", async (event) => {
 });
 
 async function checkLibrary() {
+
+  console.log(localStorage.getItem('token'))
+
   const response = await axios.get("/api/user", {
     headers: {
-      Authorization: `Bearer ${localStorage.getItem('user-id')}`
+      Authorization: `Bearer ${localStorage.getItem('token')}`
     }
   })
 

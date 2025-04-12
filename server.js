@@ -33,11 +33,6 @@ const userSchema = new mongoose.Schema({
     library: [String]
 })
 
-const librarySchema = new mongoose.Schema({
-    series_id: String,
-    series_img: String,
-    series_chapters: String
-})
 
 const User = mongoose.model('User', userSchema);
 
@@ -102,6 +97,8 @@ app.post('/api/login', async (req, res) => {
   
       // Generate JWT token
       const token = jwt.sign({ email: user.email }, 'secret');
+      console.log(token)
+      console.log(user._id)
       res.status(200).json({ token: token, username: user.username, id: user._id.toString() });
     } catch (error) {
       res.status(500).json({ error: 'Internal server error' });
@@ -148,6 +145,45 @@ app.delete('/api/:userId/:mangaId', async (req, res) => {
             {$pull: {library: mangaId}}
         )
         
+    } catch (error) {
+        console.log(error)
+    }
+})
+
+
+const librarySchema = new mongoose.Schema({
+    series_id: String,
+    series_img: String,
+    series_title: String,
+    series_chapters: String
+})
+
+const Library = mongoose.model('Library', librarySchema);
+
+app.post('/api/library', async (req, res) => {
+    try {
+
+        const newLibrary = new Library({
+            series_id: req.body.mangaID,
+            series_img: req.body.mangaImg,
+            series_title: req.body.mangaTitle,
+            series_chapters: req.body.mangaChapters
+        });
+
+
+        const seriesExist = await Library.exists( {series_id: req.body.mangaID} )
+        console.log(seriesExist)
+        
+        if(!seriesExist) {
+            await newLibrary.save();
+            res.status(201).json( {message: 'Library successfully added'} )
+
+        } else {
+            res.status(201).json( {message: 'Series already existed'} )
+        }
+
+        
+
     } catch (error) {
         console.log(error)
     }
