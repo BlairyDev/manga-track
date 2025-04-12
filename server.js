@@ -6,6 +6,8 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken')
 
+require('dotenv').config({ path: './config.env' });
+
 const app = express();
 
 const port = process.env.PORT || 8080;
@@ -16,7 +18,7 @@ app.use(cors());
 
 app.use(express.json());
 
-mongoose.connect("")
+mongoose.connect(process.env.MONGODB_URL)
 .then(() => {
     console.log('Connected to MongoDB')
 } )
@@ -62,7 +64,7 @@ app.post('/api/register', async (req, res) => {
             password: hashedPassword
         })
 
-        console.log(User.username)
+        
 
         await newUser.save();
         res.status(201).json( {message: 'User registered successfully' })
