@@ -16,7 +16,7 @@ app.use(cors());
 
 app.use(express.json());
 
-mongoose.connect("mongodb+srv://Cluster47754:n1IEc1k8js6mOs2F@cluster47754.xy0zkgy.mongodb.net/manga_track?retryWrites=true&w=majority&appName=Cluster47754")
+mongoose.connect("")
 .then(() => {
     console.log('Connected to MongoDB')
 } )
