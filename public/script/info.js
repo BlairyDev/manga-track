@@ -217,42 +217,62 @@ libraryBtn.addEventListener("click", async (event) => {
   }
   else {
      try {
-    let newSeries = {
-      series_id: mangaID,
-      title: mangaTitle,
-      image: mangaImg
-    };
 
-    const response = await axios.get("https://jsonblob.com/api/jsonBlob/1347859382574178304");
+      console.log(userID)
+
+      if (userID && libraryBtn.textContent === "Add to Library") {
+
+        libraryBtn.textContent = "Remove to Library"
+        const addSeriesResponse = await axios.put("/api/user", {userId: userID, mangaId: mangaID})
+
+        
+      }
+      else if(userID && libraryBtn.textContent === "Remove to Library"){
+        libraryBtn.textContent = "Add to Library"
+        const removeSeriesResponse = await axios.delete(`/api/${userID}/${mangaID}`)
+        
+      }
+      else {
+        console.log("User not found");
+      }
+      
+
+    // let newSeries = {
+    //   series_id: mangaID,
+    //   title: mangaTitle,
+    //   image: mangaImg
+    // };
+
+    // const response = await axios.get("https://jsonblob.com/api/jsonBlob/1347859382574178304");
     
-    console.log(response.data);
+    // console.log(response.data);
 
-    let users = response.data.users;
+    // let users = response.data.users;
 
-    const user = users.find(user => user.username === userName);
+    // const user = users.find(user => user.username === userName);
 
-    if (user && libraryBtn.textContent === "Add to Library") {
-      user.series.push(newSeries);
+    // if (user && libraryBtn.textContent === "Add to Library") {
+    //   user.series.push(newSeries);
 
-    }
-    else if(user && libraryBtn.textContent === "Remove to Library"){
-      user.series = user.series.filter(series => series.series_id !== mangaID);
-    }
-    else {
-      console.log("User not found");
-    }
+    // }
+    // else if(user && libraryBtn.textContent === "Remove to Library"){
+    //   user.series = user.series.filter(series => series.series_id !== mangaID);
+    // }
+    // else {
+    //   console.log("User not found");
+    // }
 
-    if(user){
-      axios.put("https://jsonblob.com/api/jsonBlob/1347859382574178304", { users: users })
-        .then((response) => {
-          console.log("User updated successfully:", response.data);
+    // if(user){
+    //   axios.put("https://jsonblob.com/api/jsonBlob/1347859382574178304", { users: users })
+    //     .then((response) => {
+    //       console.log("User updated successfully:", response.data);
 
-          location.reload();
-        })
-        .catch((error) => {
-          console.error("Error updating user:", error);
-        });
-    }
+    //       location.reload();
+    //     })
+    //     .catch((error) => {
+    //       console.error("Error updating user:", error);
+    //     });
+    // }
 
 
   } catch (error) {
@@ -266,11 +286,15 @@ libraryBtn.addEventListener("click", async (event) => {
 });
 
 async function checkLibrary() {
-  const response = await axios.get("https://jsonblob.com/api/jsonBlob/1347859382574178304");
+  const response = await axios.get("/api/user", {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('user-id')}`
+    }
+  })
 
-  const user = response.data.users.find(user => user.username === userName);
+  const user = response.data
 
-  const series = user.series.find(series => series.series_id === mangaID);
+  const series = user.library.includes(mangaID)
 
 
   if(series){

@@ -68,7 +68,7 @@
 
           console.log(response)
           localStorage.setItem("username", response.data.username);
-          localStorage.setItem("user-id", response.data.user_id);
+          localStorage.setItem("user-id", response.data.id);
           window.location.href = "/"
 
         } catch (error) {

@@ -29,16 +29,26 @@ mongoose.connect(process.env.MONGODB_URL)
 const userSchema = new mongoose.Schema({
     username: String,
     email: String,
-    password: String
+    password: String,
+    library: [String]
+})
+
+const librarySchema = new mongoose.Schema({
+    series_id: String,
+    series_img: String,
+    series_chapters: String
 })
 
 const User = mongoose.model('User', userSchema);
 
 const verifyToken = (req, res, next) => {
-    const token = req.headers['authorization'];
-    if(!token) {
-        return res.status(401).json({ error: 'Unauthorized'});
+    const authHeader = req.headers['authorization'];
+
+    if (!authHeader) {
+        return res.status(401).json({ error: 'Unauthorized' });
     }
+    
+    const token = authHeader.split(' ')[1];
 
     jwt.verify(token, 'secret', (err, decoded) => {
         if(err) {
@@ -61,7 +71,8 @@ app.post('/api/register', async (req, res) => {
         const newUser = new User({
             username: req.body.username,
             email: req.body.email,
-            password: hashedPassword
+            password: hashedPassword,
+            library: []
         })
 
         
@@ -91,7 +102,7 @@ app.post('/api/login', async (req, res) => {
   
       // Generate JWT token
       const token = jwt.sign({ email: user.email }, 'secret');
-      res.status(200).json({ token: token, username: user.username });
+      res.status(200).json({ token: token, username: user.username, id: user._id.toString() });
     } catch (error) {
       res.status(500).json({ error: 'Internal server error' });
     }
@@ -103,12 +114,46 @@ app.get('/api/user', verifyToken, async (req, res) => {
         if(!user) {
             return res.status(404).json( {error: 'User not found'})
         }
-        res.status(200).json({ username: user.username, email: user.email });
+        res.status(200).json({ library: user.library, id: user.id });
 
     } catch (error) {
         res.status(500).json({ error: 'Internal server error' });
     }
 })
+
+app.put('/api/user', async (req, res) => {
+    try{
+        const userId = req.body.userId
+        const mangaId = req.body.mangaId
+
+        const user = await User.findById(userId)
+
+        user.library.push(mangaId)
+
+        await user.save()
+
+    } catch (error) {
+
+    }
+})
+
+
+app.delete('/api/:userId/:mangaId', async (req, res) => {
+    try{
+        const userId = req.params.userId
+        const mangaId = req.params.mangaId
+
+        await User.updateOne(
+            {_id: userId},
+            {$pull: {library: mangaId}}
+        )
+        
+    } catch (error) {
+        console.log(error)
+    }
+})
+
+
 
 
 app.get("/api/releases", async (req, res) => {
@@ -177,15 +222,16 @@ app.get("/api/series/:id", async (req, res) => {
         const response = await axios.request(config);
         res.json(response.data);
 
-        //localStorage.setItem('mangaInfo', response.data)
-
-        //res.sendFile(path.join(__dirname, "/manga-info.html"));
-
     } catch (error) {
         console.error("Error fetching data:", error);
         res.status(500).json({ error: "Failed to fetch data" });
     }
 });
+
+app.post("api/library", (req, res) => {
+    
+})
+
 
 
 app.get("/", (req, res) => {
@@ -195,6 +241,10 @@ app.get("/", (req, res) => {
 
 app.get("/series/:id", (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'manga-info.html'));
+})
+
+app.get("/library", (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'library.html'));
 })
 
 
