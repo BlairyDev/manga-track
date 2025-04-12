@@ -248,44 +248,7 @@ libraryBtn.addEventListener("click", async (event) => {
       else {
         console.log("User not found");
       }
-      
-
-    // let newSeries = {
-    //   series_id: mangaID,
-    //   title: mangaTitle,
-    //   image: mangaImg
-    // };
-
-    // const response = await axios.get("https://jsonblob.com/api/jsonBlob/1347859382574178304");
     
-    // console.log(response.data);
-
-    // let users = response.data.users;
-
-    // const user = users.find(user => user.username === userName);
-
-    // if (user && libraryBtn.textContent === "Add to Library") {
-    //   user.series.push(newSeries);
-
-    // }
-    // else if(user && libraryBtn.textContent === "Remove to Library"){
-    //   user.series = user.series.filter(series => series.series_id !== mangaID);
-    // }
-    // else {
-    //   console.log("User not found");
-    // }
-
-    // if(user){
-    //   axios.put("https://jsonblob.com/api/jsonBlob/1347859382574178304", { users: users })
-    //     .then((response) => {
-    //       console.log("User updated successfully:", response.data);
-
-    //       location.reload();
-    //     })
-    //     .catch((error) => {
-    //       console.error("Error updating user:", error);
-    //     });
-    // }
 
 
   } catch (error) {
