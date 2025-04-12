@@ -89,7 +89,7 @@ cardRowSelected.addEventListener("click", (event) => {
     
     let mangaID = mangas[cards.indexOf(event.target)].record.series_id
 
-    localStorage.setItem('manga-id', mangaID);
+    //localStorage.setItem('manga-id', mangaID);
 
 
     window.location.href = `/series/${mangaID}`

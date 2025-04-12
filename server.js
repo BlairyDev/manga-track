@@ -177,7 +177,7 @@ app.get("/api/series/:id", async (req, res) => {
 
         //localStorage.setItem('mangaInfo', response.data)
 
-        res.sendFile(path.join(__dirname, "/manga-info.html"));
+        //res.sendFile(path.join(__dirname, "/manga-info.html"));
 
     } catch (error) {
         console.error("Error fetching data:", error);

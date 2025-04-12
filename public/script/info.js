@@ -1,4 +1,5 @@
-let mangaID = localStorage.getItem("manga-id");
+//let mangaID = localStorage.getItem("manga-id");
+const mangaID = window.location.pathname.split('/').pop();
 let userName = localStorage.getItem("username");
 let userID = localStorage.getItem("user-id");
 
