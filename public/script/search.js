@@ -92,7 +92,7 @@ cardRowSelected.addEventListener("click", (event) => {
     localStorage.setItem('manga-id', mangaID);
 
 
-    window.location.href = "manga-info.html";
+    window.location.href = `/series/${mangaID}`
   }
 
 

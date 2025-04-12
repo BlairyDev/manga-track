@@ -55,19 +55,25 @@
 
 
 
-    loginBtn.addEventListener('click', (event) => {
+    loginBtn.addEventListener('click', async (event) => {
+        let username = document.querySelector('#username').value;
+        let password = document.querySelector('#password').value;
+
         event.preventDefault();
-        axios.get('https://jsonblob.com/api/jsonBlob//1347859382574178304')
-            .then(response => {
-                console.log(response.data);
-                
-                loginAuth(response.data)
+        try {
+          const response = await axios.post("/api/login", {
+            username: username,
+            password: password
+          })
 
+          console.log(response)
+          localStorage.setItem("username", response.data.username);
+          localStorage.setItem("user-id", response.data.user_id);
+          window.location.href = "/"
 
-            })
-            .catch(error => {
-                console.error(error);
-            });
+        } catch (error) {
+          console.log(error)
+        }
 
     })
 

@@ -50,9 +50,8 @@ let mangaScanlators;
 
 async function getSeries() {
   try {
-    const response = await axios.get("/api/series", {
-      params: { id: mangaID },
-    });
+    const response = await axios.get(`/api/series/${mangaID}`);
+    //const response = localStorage.getItem("mangaInfo");
 
     let reviews = await getReviews();
     viewReviews(reviews);
