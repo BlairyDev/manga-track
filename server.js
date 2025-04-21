@@ -4,7 +4,8 @@ const cors = require('cors');
 const axios = require('axios');
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
+const { off } = require('process');
 
 require('dotenv').config({ path: './config.env' });
 
@@ -155,10 +156,27 @@ const librarySchema = new mongoose.Schema({
     series_id: String,
     series_img: String,
     series_title: String,
-    series_chapters: String
+    series_chapters: String,
+    series_comments: {
+        type: Map,
+        of: new mongoose.Schema({
+            username: String,
+            comments: [String]
+        }, { _id: false })
+    }
 })
 
 const Library = mongoose.model('Library', librarySchema);
+
+app.get('/api/library/:id', async (req, res) => {
+    try {
+        console.log(req.params.id)
+        const response = await Library.find( {series_id: req.params.id} )
+        res.json(response)
+    } catch (error) {
+        console.log(error)
+    }
+})
 
 app.post('/api/library', async (req, res) => {
     try {
@@ -167,7 +185,8 @@ app.post('/api/library', async (req, res) => {
             series_id: req.body.mangaID,
             series_img: req.body.mangaImg,
             series_title: req.body.mangaTitle,
-            series_chapters: req.body.mangaChapters
+            series_chapters: req.body.mangaChapters,
+            series_comments: {}
         });
 
 
@@ -182,6 +201,54 @@ app.post('/api/library', async (req, res) => {
             res.status(201).json( {message: 'Series already existed'} )
         }
 
+        
+
+    } catch (error) {
+        console.log(error)
+    }
+})
+
+app.put('/api/library', async (req, res) => {
+    try {
+
+        const user = await User.findById(req.body.userID);
+
+        console.log()
+
+        const newLibrary = new Library({
+            series_id: req.body.mangaID,
+            series_img: req.body.mangaImg,
+            series_title: req.body.mangaTitle,
+            series_chapters: req.body.mangaChapters,
+            series_comments: {
+                [req.body.userID]: {
+                    username: user.username,
+                    comments: [req.body.userComment]
+                }
+            }
+        });
+
+        const seriesExist = await Library.exists( {series_id: req.body.mangaID} )
+
+        if(!seriesExist) {
+            await newLibrary.save();
+            
+        } else {
+            const existingSeries = await Library.findOne({ series_id: req.body.mangaID });
+
+            if (existingSeries.series_comments.has(req.body.userID)) {
+                existingSeries.series_comments.get(req.body.userID).comments.push(req.body.userComment);
+            } else {
+                existingSeries.series_comments.set(req.body.userID, {
+                    username: user.username,
+                    comments: [req.body.userComment]
+                });
+            }
+        
+            await existingSeries.save();
+
+        }
+        
         
 
     } catch (error) {

@@ -55,8 +55,9 @@ async function getSeries() {
     const response = await axios.get(`/api/series/${mangaID}`);
     //const response = localStorage.getItem("mangaInfo");
 
-    let reviews = await getReviews();
+    let reviews = await axios.get(`/api/library/${mangaID}`)
     viewReviews(reviews);
+
 
     console.log(response.data.title);
 
@@ -117,13 +118,18 @@ function createList(detailContainer, className, mangaData) {
   container.append(ul);
 }
 
-async function getReviews() {
+async function getReviews(mangaID) {
   try {
-    const response = await axios.get(
-      "https://jsonblob.com/api/jsonBlob/1348185479006314496"
-    );
+    // const response = await axios.get(
+    //   "https://jsonblob.com/api/jsonBlob/1348185479006314496"
+    // );
+    
+
+    const response = await axios.get(`/api/library/${mangaID}`)
+
     console.log("Fetched Reviews:", response.data);
-    return response.data.comments;
+
+    return response.data;
   } catch (error) {
     console.log("Error fetching reviews:", error);
     return [];
@@ -133,30 +139,45 @@ async function getReviews() {
 let commentContainer = $(".comment-container");
 
 function viewReviews(reviews) {
-  reviews.forEach((userComment) => {
-    let comment = $("<div>", { class: "comment" });
-    let commentImg = $("<div>", { class: "comment__img" });
-    let img = $("<img>", { class: "w-50 inner__img" }).attr(
-      "src",
-      "https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg"
-    );
-    let commentUser = $("<h3>", { class: "comment__user mt-3" }).text(
-      userComment.username
-    );
-    let commentText = $("<p>", { class: "" }).text(userComment.comment);
 
-    commentImg.append(img);
+  
 
-    comment.append(commentImg, commentUser, commentText);
+  if (reviews != null) {
+    const seriesComments = reviews.data[0].series_comments;
+    console.log(reviews.data);
+    console.log(seriesComments);
 
-    commentContainer.append(comment);
-  });
+    
+    Object.values(seriesComments).forEach((userComment) => {
+      let commentUser = $("<h3>", { class: "comment__user mt-3" }).text(
+        userComment.username
+      );
+
+      userComment.comments.forEach((comment_text) => {
+        let comment = $("<div>", { class: "comment" });
+        let commentImg = $("<div>", { class: "comment__img" });
+        let img = $("<img>", { class: "w-50 inner__img" }).attr(
+          "src",
+          "https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg"
+        );
+        
+        let commentText = $("<p>").text(comment_text);
+
+        commentImg.append(img);
+        comment.append(commentImg, commentUser, commentText);
+        commentContainer.append(comment);
+      });
+    });
+  }
+
 }
 
 let reviewBtn = document.querySelector(".review-btn");
 
 reviewBtn.addEventListener("click", async (event) => {
   let inputReview = document.querySelector(".input-review");
+  let userComment = inputReview.value
+  console.log("test")
 
   if(userName === null) {
     event.preventDefault();
@@ -164,44 +185,64 @@ reviewBtn.addEventListener("click", async (event) => {
   }
   else {
     try {
-      let reviews = await getReviews();
-  
-      let updatedReviews = {
-        comments: [
-          ...reviews,
-          {
-            username: userName,
-            comment: inputReview.value,
-          },
-        ],
-      };
-  
-      let config = {
-        method: "put",
-        maxBodyLength: Infinity,
-        url: "https://jsonblob.com/api/jsonBlob/1348185479006314496",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        data: JSON.stringify(updatedReviews),
-      };
+      console.log("test")
+      axios.put("/api/library", {
+        mangaID: mangaID,
+        mangaImg: mangaImg,
+        mangaTitle: mangaTitle,
+        mangaChapters: mangaChapters,
+        userID: userID,
+        userComment: userComment
+      })
 
-      inputReview.value = "";
-  
-      axios
-        .request(config)
-        .then((response) => {
-          console.log("Updated Reviews:", response.data);
-   
-          viewReviews(response.data.comments);
-        
-        })
-        .catch((error) => {
-          console.log("Error updating reviews:", error);
-        });
+      inputReview.value = ""
+
+
     } catch (error) {
-      console.log("Error in event listener:", error);
+
     }
+
+
+
+    // try {
+    //   let reviews = await getReviews();
+  
+    //   let updatedReviews = {
+    //     comments: [
+    //       ...reviews,
+    //       {
+    //         username: userName,
+    //         comment: inputReview.value,
+    //       },
+    //     ],
+    //   };
+  
+    //   let config = {
+    //     method: "put",
+    //     maxBodyLength: Infinity,
+    //     url: "https://jsonblob.com/api/jsonBlob/1348185479006314496",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //     data: JSON.stringify(updatedReviews),
+    //   };
+
+    //   inputReview.value = "";
+  
+    //   axios
+    //     .request(config)
+    //     .then((response) => {
+    //       console.log("Updated Reviews:", response.data);
+   
+    //       viewReviews(response.data.comments);
+        
+    //     })
+    //     .catch((error) => {
+    //       console.log("Error updating reviews:", error);
+    //     });
+    // } catch (error) {
+    //   console.log("Error in event listener:", error);
+    // }
 
   }
 
