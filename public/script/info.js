@@ -197,6 +197,7 @@ reviewBtn.addEventListener("click", async (event) => {
 
       inputReview.value = ""
 
+      window.location.reload()
 
     } catch (error) {
 
