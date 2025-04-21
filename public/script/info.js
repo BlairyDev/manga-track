@@ -204,47 +204,6 @@ reviewBtn.addEventListener("click", async (event) => {
     }
 
 
-
-    // try {
-    //   let reviews = await getReviews();
-  
-    //   let updatedReviews = {
-    //     comments: [
-    //       ...reviews,
-    //       {
-    //         username: userName,
-    //         comment: inputReview.value,
-    //       },
-    //     ],
-    //   };
-  
-    //   let config = {
-    //     method: "put",
-    //     maxBodyLength: Infinity,
-    //     url: "https://jsonblob.com/api/jsonBlob/1348185479006314496",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     data: JSON.stringify(updatedReviews),
-    //   };
-
-    //   inputReview.value = "";
-  
-    //   axios
-    //     .request(config)
-    //     .then((response) => {
-    //       console.log("Updated Reviews:", response.data);
-   
-    //       viewReviews(response.data.comments);
-        
-    //     })
-    //     .catch((error) => {
-    //       console.log("Error updating reviews:", error);
-    //     });
-    // } catch (error) {
-    //   console.log("Error in event listener:", error);
-    // }
-
   }
 
 
