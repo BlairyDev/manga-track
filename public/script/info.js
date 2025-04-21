@@ -164,7 +164,7 @@ function viewReviews(reviews) {
         let commentText = $("<p>").text(comment_text);
 
         commentImg.append(img);
-        comment.append(commentImg, commentUser, commentText);
+        comment.append(commentImg, commentUser.clone(), commentText);
         commentContainer.append(comment);
       });
     });
