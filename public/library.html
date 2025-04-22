@@ -137,22 +137,23 @@
 
         async function fetchResults(page) {
             try {
-                const response = await axios.get("https://jsonblob.com/api/jsonBlob//1347859382574178304");
-                console.log(response.data);
 
-                const data = response.data;
+                const response = await axios.get(`/user/library/${userID}`);
+                const userLibrary = response.data.library;
 
-                mangas = data.users.find(user => user.user_id === userID);
+                const listOfSeries = [];
 
+                for (const series of userLibrary) {
+                    const seriesInfo = await axios.get(`/api/library/${series}`);
+                    listOfSeries.push({
+                        title: seriesInfo.data[0].series_title,
+                        image: seriesInfo.data[0].series_img
+                    });
+                }
+
+
+                createCard(listOfSeries);
                 
-
-                totalPages = mangas.total_hits;
-                console.log(totalPages)
-                currentPage = 1;
-
-                const series = mangas.series;
-
-                createCard(series);
             } catch (error) {
                 console.log(error);
             }
@@ -162,6 +163,11 @@
         let cardColumn;
 
         function createCard(series) {
+
+            series.forEach((item) => {
+                console.log(item.title)
+            })
+
             series.forEach((item) => {
                 let img =
                     item.image||

@@ -183,6 +183,15 @@ const librarySchema = new mongoose.Schema({
 
 const Library = mongoose.model('Library', librarySchema);
 
+app.get('/user/library/:id', async (req, res) => {
+    try {
+        const response = await User.findById(req.params.id)
+        res.json(response)
+    } catch (error) {
+        console.log(error)
+    }
+})
+
 app.get('/api/library/:id', async (req, res) => {
     try {
         console.log(req.params.id)
