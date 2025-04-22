@@ -31,8 +31,14 @@ const userSchema = new mongoose.Schema({
     username: String,
     email: String,
     password: String,
-    library: [String]
+    library: [String],
+    devices: [{
+        name: String,
+        endpoint: String
+    }]
 })
+
+
 
 
 const User = mongoose.model('User', userSchema);
@@ -55,6 +61,11 @@ const verifyToken = (req, res, next) => {
     })
 }
 
+
+app.get('/api/env', (req, res) => {
+    res.json(process.env.VAPID_PUBLIC_KEY)
+})
+
 app.post('/api/register', async (req, res) => {
     try {
         const existingUser = await User.findOne({ email: req.body.email });
@@ -68,7 +79,11 @@ app.post('/api/register', async (req, res) => {
             username: req.body.username,
             email: req.body.email,
             password: hashedPassword,
-            library: []
+            library: [],
+            devices: [{
+                name: req.body.deviceName,
+                endpoint: req.body.endpoint
+            }]
         })
 
         
