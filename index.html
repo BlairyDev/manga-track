@@ -41,7 +41,7 @@
 
     <nav class="navbar navbar-expand-lg">
       <div class="container-fluid main-container p-0">
-        <a class="navbar-brand" href="index.html" style="color: white;"><img src="css/logo.png"
+        <a class="navbar-brand" href="/" style="color: white;"><img src="css/logo.png"
             style="width: 100%; max-width: 150px;"></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
           aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -55,16 +55,7 @@
 
         </div>
         <div class="d-flex">
-          <form class="d-flex" action="/search-results.html" method="get">
-
-            <div class="search-bar">
-              <input type="text" class="search-input" name="search" placeholder="Search">
-              <button class="search-submit" disabled>
-                <i class="fa-solid fa-magnifying-glass"></i>
-              </button>
-            </div>
-
-          </form>
+        
           <div class="ps-3 d-flex align-items-center gap-2">
             <p class="greeting">Greetings, Guest!</p>
             <a class="login-btn" href="#">Log in</a>
@@ -80,79 +71,29 @@
 
   </header>
 
-
-
-  <div class="swiper mySwiper">
-    <div class="swiper-wrapper highlight-swiper">
-      <div class="swiper-slide">
-        <div class="bg"></div>
-        <h1>Peerless Dad</h1>
-      </div>
-      <div class="swiper-slide">
-        <div class="bg"></div>
-        <h1>Wind Breaker</h1>
-      </div>
-      <div class="swiper-slide">
-        <div class="bg"></div>
-        <h1>Gurenn Lagann</h1>
-      </div>
-      <div class="swiper-slide">
-        <div class="bg"></div>
-        <h1>Soul Eater</h1>
-      </div>
-      <div class="swiper-slide">
-        <div class="bg"></div>
-        <h1>Arcane Sniper</h1>
-      </div>
-    </div>
-
-    <div class="swiper-button-next"></div>
-    <div class="swiper-button-prev"></div>
-    <div class="swiper-pagination"></div>
   </div>
 
   <main class="main-section">
 
     <div class="main-container">
 
-      <h2 class="mt-5 mb-4">Recommendations</h2>
+  
 
-      <div class="swiper freeSwiper">
-        <div class="swiper-wrapper recommend-swiper">
-          <div class="swiper-slide free-slide"></div>
-          <div class="swiper-slide free-slide"></div>
-          <div class="swiper-slide free-slide"></div>
-          <div class="swiper-slide free-slide"></div>
-          <div class="swiper-slide free-slide"></div>
-          <div class="swiper-slide free-slide"></div>
-          <div class="swiper-slide free-slide"></div>
-          <div class="swiper-slide free-slide"></div>
+      <form class="form-container" action="/search-results.html" method="get">
+
+        <a class="navbar-brand" style="color: white;"><img src="css/logo.png"
+          style="width: 100%; max-width: 600px; margin: 0 auto; padding-bottom: 2em;"></a>
+
+        <div class="search-bar-home">
+          <input type="text" class="search-input-home" name="search" placeholder="Search">
+          <button class="search-submit" disabled>
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
         </div>
-        <div class="swiper-pagination free-pagination"></div>
-      </div>
 
-      <h2 class="mb-4">Top Series</h2>
+      </form>
 
-      <div class="swiper freeSwiper">
-        <div class="swiper-wrapper top-swiper">
-          <div class="swiper-slide free-slide"></div>
-          <div class="swiper-slide free-slide"></div>
-          <div class="swiper-slide free-slide"></div>
-          <div class="swiper-slide free-slide"></div>
-          <div class="swiper-slide free-slide"></div>
-          <div class="swiper-slide free-slide"></div>
-          <div class="swiper-slide free-slide"></div>
-          <div class="swiper-slide free-slide"></div>
-        </div>
-        <div class="swiper-pagination free-pagination"></div>
-      </div>
-
-      <h2 class="mt-5 mb-4">New Releases</h2>
-
-      <div class="row row-cols-1 row-cols-md-5 g-3 m-0"></div>
-
-      <div id="content"></div>
-      <div id="pagination"></div>
+      
 
     </div>
 
