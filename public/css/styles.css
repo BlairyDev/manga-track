@@ -311,7 +311,6 @@ h4 {
     object-fit: cover;
 }
 
-
 .search-bar {
     --size: 50px;
     --padding: 8px;
@@ -354,6 +353,45 @@ h4 {
 .search-bar:hover .search-input {
     opacity: 1;
 }
+
+
+.search-bar-home {
+    --size: 100px;
+    --padding: 8px;
+    --expanded-width: 500px;
+
+    display: flex;
+    justify-content: flex-end;
+  
+    
+    border-radius: 100px;
+    outline: 1px solid transparent;
+    overflow: hidden;
+
+    padding: var(--padding);
+    margin-inline: auto;
+    width: var(--expanded-width);
+    height: var(--size);
+    max-width: 100%;
+    transition: width 0.5s, outline 0.5s;
+    outline: 1px solid #2e2e2e;
+}
+
+
+.search-input-home {
+    font-size: 23px;
+    color: white;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    margin-inline: 1rem;
+    flex: auto;
+    margin-left: 4em;
+    opacity: 1;
+    transition: opacity 0.5s;
+}
+
+
 
 .search-submit {
     flex: none;

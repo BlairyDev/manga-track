@@ -56,8 +56,11 @@ async function getSeries() {
     //const response = localStorage.getItem("mangaInfo");
 
     let reviews = await axios.get(`/api/library/${mangaID}`)
-    viewReviews(reviews);
+    console.log(reviews)
+    if(!reviews.data.length === 0) {
+      viewReviews(reviews);
 
+    }
 
     console.log(response.data.title);
 
@@ -120,10 +123,6 @@ function createList(detailContainer, className, mangaData) {
 
 async function getReviews(mangaID) {
   try {
-    // const response = await axios.get(
-    //   "https://jsonblob.com/api/jsonBlob/1348185479006314496"
-    // );
-    
 
     const response = await axios.get(`/api/library/${mangaID}`)
 
@@ -185,7 +184,7 @@ reviewBtn.addEventListener("click", async (event) => {
   }
   else {
     try {
-      console.log("test")
+
       axios.put("/api/library", {
         mangaID: mangaID,
         mangaImg: mangaImg,
