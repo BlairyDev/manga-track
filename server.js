@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { off } = require('process');
+const webpush = require('web-push')
 
 require('dotenv').config({ path: './config.env' });
 
@@ -359,7 +360,74 @@ app.post("api/library", (req, res) => {
     
 })
 
+const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
+app.get("/check", async (req, res) => {
+    const series = await User.distinct("library")
+    
+    
+    for (const series_id of series) {
+        const response = await axios.get(`http://localhost:8080/api/series/${series_id}`);
+       
+        const librarySeries = await Library.findOne({ series_id: series_id });
+
+
+
+        
+        console.log(response.data.latest_chapter + "" + librarySeries.series_chapters);
+
+        if(parseInt(response.data.latest_chapter) > parseInt(librarySeries.series_chapters)) {
+            const message = `${response.data.title} has a new chapter!`
+
+            const users = await User.find({library: series_id})
+            
+
+            users.forEach((user) => {
+                
+                const pushSubscription = JSON.parse(user.devices[0].endpoint)
+                
+                webpush.setVapidDetails(
+                    'mailto:youremail@example.com',
+                    process.env.VAPID_PUBLIC_KEY,
+                    process.env.VAPID_PRIVATE_KEY
+                )
+                webpush.sendNotification(
+                    pushSubscription,
+                    JSON.stringify({ message })
+                )
+                
+            })
+
+
+        } else {
+            const message = `${response.data.title} has no new chapter!`
+
+            const users = await User.find({library: series_id})
+            
+
+            users.forEach((user) => {
+                
+                const pushSubscription = JSON.parse(user.devices[0].endpoint)
+                
+                webpush.setVapidDetails(
+                    'mailto:youremail@example.com',
+                    process.env.VAPID_PUBLIC_KEY,
+                    process.env.VAPID_PRIVATE_KEY
+                )
+                webpush.sendNotification(
+                    pushSubscription,
+                    JSON.stringify({ message })
+                )
+                
+            })
+        }
+        
+        await delay(5000);
+    }
+    res.end('Sending message: Success')
+})
+
+  
 
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "/index.html"));
@@ -373,6 +441,7 @@ app.get("/series/:id", (req, res) => {
 app.get("/library", (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'library.html'));
 })
+
 
 
 

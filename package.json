@@ -25,6 +25,8 @@
     "express": "^4.21.2",
     "jsonwebtoken": "^9.0.2",
     "mongodb": "6.15",
-    "mongoose": "^8.13.2"
+    "mongoose": "^8.13.2",
+    "node-cron": "^3.0.3",
+    "web-push": "^3.6.7"
   }
 }

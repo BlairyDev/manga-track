@@ -24,7 +24,7 @@ loginBtn.addEventListener("click", (event) => {
   }
 });
 
-let searchInput= document.querySelector(".search-input");
+let searchInput= document.querySelector(".search-input-home");
 let searchSubmit = document.querySelector(".search-submit");
 
 

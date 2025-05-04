@@ -139,7 +139,6 @@ let commentContainer = $(".comment-container");
 
 function viewReviews(reviews) {
 
-  
 
   if (reviews != null) {
     const seriesComments = reviews.data[0].series_comments;
