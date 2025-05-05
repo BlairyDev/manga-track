@@ -65,11 +65,11 @@
             username: username,
             password: password
           })
-
+          
           console.log(response)
-          localStorage.setItem("username", response.data.username);
-          localStorage.setItem("user-id", response.data.id);
-          localStorage.setItem("token", response.data.token)
+          sessionStorage.setItem("username", response.data.username);
+          sessionStorage.setItem("user-id", response.data.id);
+          sessionStorage.setItem("token", response.data.token)
           window.location.href = "/"
 
         } catch (error) {

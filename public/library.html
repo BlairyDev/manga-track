@@ -102,8 +102,8 @@
     </body>
 
     <script>
-        let userID = localStorage.getItem("user-id");
-        let userName = localStorage.getItem("username");
+        let userID = sessionStoragee.getItem("user-id");
+        let userName = sessionStorage.getItem("username");
 
         let greeting = document.querySelector(".greeting");
         let loginBtn = document.querySelector(".login-btn");
@@ -124,7 +124,7 @@
             }
             else {
                 loginBtn.textContent = "Log in"
-                localStorage.clear();
+                sessionStorage.clear();
                 location.reload();
             }
 
@@ -222,7 +222,7 @@
 
                 console.log(mangaID);
 
-                localStorage.setItem("manga-id", mangaID);
+                sessionStorage.setItem("manga-id", mangaID);
 
                 window.location.href = "manga-info.html";
             }
