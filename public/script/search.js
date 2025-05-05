@@ -3,8 +3,8 @@ const searchQuery = urlParams.get("search");
 
 console.log(searchQuery);
 
-let totalPages = 0; // Total number of pages
-let currentPage = 0; // Current page
+let totalPages = 0; 
+let currentPage = 0; 
 
 let mangas;
 
