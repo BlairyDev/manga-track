@@ -46,7 +46,7 @@
                     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                         <div class="navbar-nav">
                             <a class="nav-link active" aria-current="page" href="library.html" style="color: white;">Library</a>
-
+                            <a class="nav-link active" aria-current="page" href="notification.html" style="color: white;">Notifications</a>
                         </div>
 
                     </div>
@@ -139,7 +139,7 @@
             try {
 
                 const response = await axios.get(`/user/library/${userID}`);
-                const userLibrary = response.data.library;
+                const userLibrary = response.data.notification;
 
                 const listOfSeries = [];
 

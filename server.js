@@ -35,6 +35,7 @@ const userSchema = new mongoose.Schema({
     email: String,
     password: String,
     library: [String],
+    notification: [String],
     devices: [{
         name: String,
         endpoint: String
@@ -81,6 +82,7 @@ app.post('/api/register', async (req, res) => {
             email: req.body.email,
             password: hashedPassword,
             library: [],
+            notification: [],
             devices: [{
                 name: req.body.deviceName,
                 endpoint: req.body.endpoint
@@ -146,7 +148,23 @@ app.put('/api/user', async (req, res) => {
         await user.save()
 
     } catch (error) {
+        console.log(error)
+    }
+})
 
+app.put('/api/user/notification', async (req, res) => {
+    try{
+        const userId = req.body.userId
+        const mangaId = req.body.mangaId
+
+        const user = await User.findById(userId)
+
+        user.notification.push(mangaId)
+
+        await user.save()
+
+    } catch (error) {
+        console.log(error)
     }
 })
 
@@ -183,6 +201,8 @@ const librarySchema = new mongoose.Schema({
 
 const Library = mongoose.model('Library', librarySchema);
 
+
+
 app.get('/user/library/:id', async (req, res) => {
     try {
         const response = await User.findById(req.params.id)
@@ -191,6 +211,7 @@ app.get('/user/library/:id', async (req, res) => {
         console.log(error)
     }
 })
+
 
 app.get('/api/library/:id', async (req, res) => {
     try {
@@ -355,10 +376,6 @@ app.get("/api/series/:id", async (req, res) => {
     }
 });
 
-app.post("api/library", (req, res) => {
-    
-})
-
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
 app.get("/check", async (req, res) => {
@@ -392,12 +409,17 @@ app.get("/check", async (req, res) => {
                 )
                 webpush.sendNotification(
                     pushSubscription,
-                    JSON.stringify({ message })
+                    JSON.stringify(message)
                 )
+
+                axios.put("http://localhost:8080/api/user/notification", {
+                    userId: user._id.toString(),
+                    mangaId: series_id
+                })
                 
             })
 
-
+            
         } 
         
         await delay(5000);

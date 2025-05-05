@@ -16,7 +16,7 @@ if (userID != null) {
 
 loginBtn.addEventListener("click", (event) => {
   if (loginBtn.textContent == "Log in") {
-    window.location.href = "login.html";
+    window.location.href = "/";
   } else {
     loginBtn.textContent = "Log in";
     localStorage.clear();
