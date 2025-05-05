@@ -140,8 +140,9 @@
 
                 const response = await axios.get(`/user/library/${userID}`);
                 const userLibrary = response.data.notification;
-
+                mangas = response.data.notification
                 const listOfSeries = [];
+
 
                 for (const series of userLibrary) {
                     const seriesInfo = await axios.get(`/api/library/${series}`);
@@ -212,20 +213,21 @@
 
         let cardRowSelected = document.querySelector(".row");
 
-        cardRowSelected.addEventListener("click", (event) => {
+        cardRowSelected.addEventListener("click", async (event) => {
             const target = event.target;
-
+            event.preventDefault();
             let cards = Array.from(cardRowSelected.getElementsByClassName("cover__img"));
 
             if (target.tagName === "IMG" || target.tagName === "P") {
-                let mangaID = mangas.series[cards.indexOf(event.target)].series_id;
-
+                let mangaID = mangas[cards.indexOf(event.target)];
+                
                 console.log(mangaID);
-
+            
                 localStorage.setItem("manga-id", mangaID);
-
-                window.location.href = "manga-info.html";
+                window.location.href = `http://localhost:8080/series/${mangaID}`;
+                await axios.delete(`/api/user/notification/${userID}/${mangaID}`)
             }
+            
         });
 
 

@@ -140,7 +140,7 @@
 
                 const response = await axios.get(`/user/library/${userID}`);
                 const userLibrary = response.data.library;
-
+                mangas = response.data.library
                 const listOfSeries = [];
 
                 for (const series of userLibrary) {
@@ -218,13 +218,13 @@
             let cards = Array.from(cardRowSelected.getElementsByClassName("cover__img"));
 
             if (target.tagName === "IMG" || target.tagName === "P") {
-                let mangaID = mangas.series[cards.indexOf(event.target)].series_id;
+                let mangaID = mangas[cards.indexOf(event.target)];
 
                 console.log(mangaID);
 
                 localStorage.setItem("manga-id", mangaID);
 
-                window.location.href = "manga-info.html";
+                window.location.href = `http://localhost:8080/series/${mangaID}`;
             }
         });
 

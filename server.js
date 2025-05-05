@@ -168,6 +168,21 @@ app.put('/api/user/notification', async (req, res) => {
     }
 })
 
+app.delete('/api/user/notification/:userId/:mangaId', async (req, res) => {
+    try{
+        const userId = req.params.userId
+        const mangaId = req.params.mangaId
+
+        await User.updateOne(
+            {_id: userId},
+            {$pull: {notification: mangaId}}
+        )
+        
+    } catch (error) {
+        console.log(error)
+    }
+})
+
 
 app.delete('/api/:userId/:mangaId', async (req, res) => {
     try{
