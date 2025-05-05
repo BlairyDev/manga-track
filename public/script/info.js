@@ -1,4 +1,3 @@
-//let mangaID = localStorage.getItem("manga-id");
 const mangaID = window.location.pathname.split('/').pop();
 let userName = localStorage.getItem("username");
 let userID = localStorage.getItem("user-id");
@@ -53,7 +52,6 @@ let mangaChapters;
 async function getSeries() {
   try {
     const response = await axios.get(`/api/series/${mangaID}`);
-    //const response = localStorage.getItem("mangaInfo");
 
     let reviews = await axios.get(`/api/library/${mangaID}`)
     console.log(reviews)
@@ -72,7 +70,6 @@ async function getSeries() {
     mangaYear = response.data.year;
     mangaIsLicensed = response.data.licensed;
     mangaPublishers = response.data.publishers;
-    // mangaScanlators = dont forget to add this use API to get group scanlations
     mangaChapters = response.data.latest_chapter
 
     let infoAuthor = document.querySelector(".info__author");
