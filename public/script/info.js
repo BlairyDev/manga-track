@@ -1,6 +1,6 @@
 const mangaID = window.location.pathname.split('/').pop();
-let userName = sessionStorage.getItem("username");
-let userID = sessionStorage.getItem("user-id");
+let userName = localStorage.getItem("username");
+let userID = localStorage.getItem("user-id");
 
 
 let greeting = document.querySelector(".greeting");
@@ -19,7 +19,7 @@ loginBtn.addEventListener("click", (event) => {
     window.location.href = "login.html";
   } else {
     loginBtn.textContent = "Log in";
-    sessionStorage.clear();
+    localStorage.clear();
     location.reload();
   }
 });
@@ -258,10 +258,11 @@ libraryBtn.addEventListener("click", async (event) => {
 
 async function checkLibrary() {
 
+  console.log(localStorage.getItem('token'))
 
   const response = await axios.get("/api/user", {
     headers: {
-      Authorization: `Bearer ${sessionStorage.getItem('token')}`
+      Authorization: `Bearer ${localStorage.getItem('token')}`
     }
   })
 

@@ -1,5 +1,5 @@
-let userID = sessionStorage.getItem("user-id");
-let userName = sessionStorage.getItem("username");
+let userID = localStorage.getItem("user-id");
+let userName = localStorage.getItem("username");
 
 let greeting = document.querySelector(".greeting");
 let loginBtn = document.querySelector(".login-btn");
@@ -19,7 +19,7 @@ loginBtn.addEventListener("click", (event) => {
     window.location.href = "login.html";
   } else {
     loginBtn.textContent = "Log in";
-    sessionStorage.clear();
+    localStorage.clear();
     location.reload();
   }
 });
