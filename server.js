@@ -6,9 +6,11 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { off } = require('process');
-const webpush = require('web-push')
+const webpush = require('web-push');
+const startCronJob = require('./cron-job.js')
 
 require('dotenv').config({ path: './config.env' });
+
 
 const app = express();
 
@@ -38,8 +40,6 @@ const userSchema = new mongoose.Schema({
         endpoint: String
     }]
 })
-
-
 
 
 const User = mongoose.model('User', userSchema);
@@ -100,25 +100,24 @@ app.post('/api/register', async (req, res) => {
 
 app.post('/api/login', async (req, res) => {
     try {
-      // Check if the email exists
-      const user = await User.findOne({ email: req.body.username });
-      if (!user) {
-        return res.status(401).json({ error: 'Invalid credentials' });
-      }
-  
-      // Compare passwords
-      const passwordMatch = await bcrypt.compare(req.body.password, user.password);
-      if (!passwordMatch) {
-        return res.status(401).json({ error: 'Invalid credentials' });
-      }
-  
-      // Generate JWT token
-      const token = jwt.sign({ email: user.email }, 'secret');
-      console.log(token)
-      console.log(user._id)
-      res.status(200).json({ token: token, username: user.username, id: user._id.toString() });
+
+
+        const user = await User.findOne({ email: req.body.username });
+        if (!user) {
+            return res.status(401).json({ error: 'Invalid credentials' });
+        }
+    
+        const passwordMatch = await bcrypt.compare(req.body.password, user.password);
+        if (!passwordMatch) {
+            return res.status(401).json({ error: 'Invalid credentials' });
+        }
+    
+        const token = jwt.sign({ email: user.email }, 'secret');
+        console.log(token)
+        console.log(user._id)
+        res.status(200).json({ token: token, username: user.username, id: user._id.toString() });
     } catch (error) {
-      res.status(500).json({ error: 'Internal server error' });
+        res.status(500).json({ error: 'Internal server error' });
     }
   });
 
@@ -399,32 +398,12 @@ app.get("/check", async (req, res) => {
             })
 
 
-        } else {
-            const message = `${response.data.title} has no new chapter!`
-
-            const users = await User.find({library: series_id})
-            
-
-            users.forEach((user) => {
-                
-                const pushSubscription = JSON.parse(user.devices[0].endpoint)
-                
-                webpush.setVapidDetails(
-                    'mailto:youremail@example.com',
-                    process.env.VAPID_PUBLIC_KEY,
-                    process.env.VAPID_PRIVATE_KEY
-                )
-                webpush.sendNotification(
-                    pushSubscription,
-                    JSON.stringify({ message })
-                )
-                
-            })
-        }
+        } 
         
         await delay(5000);
     }
-    res.end('Sending message: Success')
+
+    res.json("Successfully checked")
 })
 
   
@@ -443,7 +422,7 @@ app.get("/library", (req, res) => {
 })
 
 
-
+startCronJob()
 
 app.listen(port, () => console.log(`Server running on port ${port}`))
 
