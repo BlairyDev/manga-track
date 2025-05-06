@@ -1,7 +1,7 @@
 # manga-track
 
 # Links
-  - Video Presentation: https://www.youtube.com/watch?v=25q7lqFw_Eg
+  - Video Presentation: https://youtu.be/FZGp6Oa_EdM
   - Github Pages: N/A (MangaUpdates API not working with Github Pages and I was not able to grab the data. Resulting to running it on NodeJS to make it work. Please read README.md further for instructions on how to run it)
 
 
