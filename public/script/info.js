@@ -54,8 +54,10 @@ async function getSeries() {
     const response = await axios.get(`/api/series/${mangaID}`);
 
     let reviews = await axios.get(`/api/library/${mangaID}`)
-    console.log(reviews)
-    if(!reviews.data.length === 0) {
+  
+    console.log(reviews.data)
+    if(reviews.data.length != 0) {
+      console.log("review inside")
       viewReviews(reviews);
 
     }

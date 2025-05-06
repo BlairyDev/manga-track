@@ -403,8 +403,6 @@ app.get("/check", async (req, res) => {
         const librarySeries = await Library.findOne({ series_id: series_id });
 
 
-
-        
         console.log(response.data.latest_chapter + "" + librarySeries.series_chapters);
 
         if(parseInt(response.data.latest_chapter) > parseInt(librarySeries.series_chapters)) {
