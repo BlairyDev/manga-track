@@ -13,12 +13,6 @@ A website for all your Manga(Japanese), Manwha(Korean), and Manhua(Chinese) seri
 
 ## Blair Asistin(Individual)
 
-### Contributions
-
-- Made the HTML structure index.html, library.html, login.html, manga-info.html, register.html, and search-results.html
-- Made the pages responsive with CSS and Bootstrap
-- Use jsonBlob to store user information and series
-- Use MangaUpdates API to fetch the series data
 
 
 # Instructions to run the website
@@ -33,11 +27,17 @@ A website for all your Manga(Japanese), Manwha(Korean), and Manhua(Chinese) seri
     ```terminal
     npm install
 
-3. Run the server(to make MangaUpdates API work)
+3. In `config.env` Add your mongodb credentials and VAPID keys(you can generate a key here: https://web-push-codelab.glitch.me/)
+   ```terminal
+    MONGODB_URL = add your credentials here
+    VAPID_PUBLIC_KEY = add key here
+    VAPID_PRIVATE_KEY = add key here
+
+4. Run the server(to make MangaUpdates API work)
     ```terminal
     node server.js
 
-4. Open website with this link
+5. Open website with this link
     ```terminal
     http://localhost:8080/
         
