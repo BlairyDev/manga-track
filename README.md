@@ -1,12 +1,16 @@
 # manga-track
 
+<p align="center">
+  <img src="public/css/logo.png" alt="Jetpack Compose Logo" width="600" />
+</p>
+
+
 # Links
   - Video Presentation: https://youtu.be/FZGp6Oa_EdM
-  - Github Pages: N/A (MangaUpdates API not working with Github Pages and I was not able to grab the data. Resulting to running it on NodeJS to make it work. Please read README.md further for instructions on how to run it)
 
 
 # Description
-A website for all your Manga(Japanese), Manwha(Korean), and Manhua(Chinese) series information. It also tracks your series for any updates and notify you on your mobile devices.
+A website for all your Manga(Japanese), Manwha(Korean), and Manhua(Chinese) series information. It also tracks your series for any updates and notify you via web push notifications.
 
 
 # Members and Contributions
