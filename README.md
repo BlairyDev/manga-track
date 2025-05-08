@@ -1,7 +1,7 @@
 # manga-track
 
 <p align="center">
-  <img src="public/css/logo.png" alt="Jetpack Compose Logo" width="600" />
+  <img src="public/css/logo.png" alt="Logo" width="600" />
 </p>
 
 
@@ -16,6 +16,13 @@ A website for all your Manga(Japanese), Manwha(Korean), and Manhua(Chinese) seri
 # Members and Contributions
 
 ## Blair Asistin(Individual)
+## Contributions
+  - Created Login and Signup with MongoDB
+  - Users are able to add and remove in their library
+  - Users are able to add reviews in a series
+  - Web push notification that runs every 10 minutes to check if there is any new updates in a series and notify user who has it
+  - Added routes for series details with their id (e.g http://localhost:8080/series/:id)
+  - Added search functionality which also works with query parameter(e.g http://localhost:8080/search-results.html?search=test)
 
 
 
