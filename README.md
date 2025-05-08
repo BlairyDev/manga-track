@@ -17,13 +17,14 @@ A website for all your Manga(Japanese), Manwha(Korean), and Manhua(Chinese) seri
 
 ## Blair Asistin(Individual)
 ## Contributions
-  - Created Login and Signup with MongoDB
+  - Created Login and Signup with MongoDB and JSON Web Token
   - Users are able to add and remove in their library
   - Users are able to add reviews in a series
   - Web push notification that runs every 10 minutes to check if there is any new updates in a series and notify user who has it
   - Added routes for series details with their id (e.g http://localhost:8080/series/:id)
   - Added search functionality which also works with query parameter(e.g http://localhost:8080/search-results.html?search=test)
-
+  - Grab series data with MangaUpdates API
+  - Created server with NodeJS and Express
 
 
 # Instructions to run the website
@@ -44,7 +45,7 @@ A website for all your Manga(Japanese), Manwha(Korean), and Manhua(Chinese) seri
     VAPID_PUBLIC_KEY = add key here
     VAPID_PRIVATE_KEY = add key here
 
-4. Run the server(to make MangaUpdates API work)
+4. Run the server
     ```terminal
     node server.js
 
